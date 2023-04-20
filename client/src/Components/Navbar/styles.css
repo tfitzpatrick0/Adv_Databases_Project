@@ -1,0 +1,50 @@
+@import "../../assets/global.css";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, var(--sky-blue), var(--royal));
+  height: 60px;
+  padding: 0 20px;
+}
+
+.navbar__logo img {
+  height: 40px;
+}
+
+.navbar__links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__links li {
+  margin-right: 20px;
+}
+
+.navbar__links li:last-child {
+  margin-right: 0;
+}
+
+.navbar__links-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar__profile-link {
+  background-color: #fff;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navbar__profile-link:hover {
+  background-color: #333;
+  color: #fff;
+}

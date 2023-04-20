@@ -1,0 +1,5 @@
+@import "../../assets/global.css";
+
+.bg-1 {
+    background: linear-gradient(90deg, var(--sky-blue), var(--royal));
+}

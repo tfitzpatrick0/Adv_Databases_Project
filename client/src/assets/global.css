@@ -1,0 +1,10 @@
+/* GLOBAL CSS STYLES */
+/* Import into other css files with @import global.css */
+
+:root {
+    --sky-blue: #00B9FC;
+    --aqua: #0064DE;
+    --blue: #052DF5;
+    --royal: #1B00DE;
+    --purple: #6900FC;
+}
