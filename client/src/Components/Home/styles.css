@@ -15,16 +15,3 @@ and a regular width of 40% of the parent div*/
   justify-content: center;
   align-items: center;
 }
-
-/* write css for a div that creates repeating grid elements with a width of 400px. any extra elements go on to the next row */
-.panels__wrapper {
-  margin: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-gap: 1rem;
-}
-
-/* child element panel of panels__wrapper should have a gradient gray background and a height of 400px */
-.panel {
-  height: 400px;
-}

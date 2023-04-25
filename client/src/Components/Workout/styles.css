@@ -1,0 +1,13 @@
+@import "../../assets/global.css";
+
+/* write css for .workout__header that pushes child elements to the left and right side of the page */
+.workout__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+
+.wb {
+  margin-right: 1rem;
+}
