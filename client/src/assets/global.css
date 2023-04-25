@@ -38,3 +38,7 @@ body {
 .button-1:hover {
   background: linear-gradient(90deg, var(--sky-blue), var(--aqua));
 }
+
+.bg-1 {
+  background: linear-gradient(90deg, gray, lightgray);
+}

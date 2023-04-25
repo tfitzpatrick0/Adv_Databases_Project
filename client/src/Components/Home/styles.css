@@ -26,6 +26,5 @@ and a regular width of 40% of the parent div*/
 
 /* child element panel of panels__wrapper should have a gradient gray background and a height of 400px */
 .panel {
-  background: linear-gradient(90deg, gray, lightgray);
   height: 400px;
 }

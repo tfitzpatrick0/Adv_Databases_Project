@@ -27,7 +27,7 @@ export default function Home() {
       <div className="panels__wrapper">
         {/* map elements from routines into child div elements */}
         {routines.map((routine, index) => (
-          <div className="routine" key={index}>
+          <div className="panel bg-1" key={index}>
             <h2>{routine}</h2>
           </div>
         ))}

@@ -23,14 +23,12 @@
 
 .routine {
   padding: 1rem;
-  background: linear-gradient(90deg, gray, lightgray);
 }
 
 .rec-routine {
   padding: 1rem;
   margin-bottom: 1rem;
   height: 200px;
-  background: linear-gradient(90deg, gray, lightgray);
 }
 
 .rec-routine:last-child {
