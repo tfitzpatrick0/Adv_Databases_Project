@@ -8,6 +8,7 @@ import {
 
 import Navbar from "./Navbar/Navbar";
 import Home from "./Home/Home";
+import Routines from "./Routines/Routines";
 
 export default function Components() {
   return (
@@ -16,10 +17,10 @@ export default function Components() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/routines" element={<Routines />} />
           {/* 
           <Route path="/profile" element={<Profile />} />
           <Route path="/exercises" element={<Exercises />} />
-          <Route path="/routines" element={<Routines />} />
           <Route path="/workout" element={<Workout />} />
           <Route path="/history" element={<History />} />
           */}
