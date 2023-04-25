@@ -24,10 +24,10 @@ export default function Home() {
       <div className="quickstart__wrapper">
         <button className="button-1">Quick Start</button>
       </div>
-      <div className="panels__wrapper">
+      <div className="panels__wrapper-1">
         {/* map elements from routines into child div elements */}
         {routines.map((routine, index) => (
-          <div className="panel bg-1" key={index}>
+          <div className="panel-1 bg-1" key={index}>
             <h2>{routine}</h2>
           </div>
         ))}

@@ -44,7 +44,7 @@ body {
 }
 
 /* write css for a div that creates repeating grid elements with a width of 400px. any extra elements go on to the next row */
-.panels__wrapper {
+.panels__wrapper-1 {
   margin: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -52,8 +52,8 @@ body {
 }
 
 /* child element panel of panels__wrapper should have a gradient gray background and a height of 400px */
-.panel {
-  height: 400px;
+.panel-1 {
+  height: 300px;
 }
 
 .panels__wrapper-2 {
