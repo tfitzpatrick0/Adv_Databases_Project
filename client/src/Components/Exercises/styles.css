@@ -1,1 +1,14 @@
 @import "../../assets/global.css";
+
+.exercises__wrapper {
+  margin: 1rem;
+}
+
+.exercise {
+  height: 3rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}

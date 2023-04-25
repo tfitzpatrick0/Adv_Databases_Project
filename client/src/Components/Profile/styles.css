@@ -1,0 +1,32 @@
+@import "../../assets/global.css";
+
+.profile__header {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+
+.profile__header > img {
+  margin-right: 2rem;
+  border-radius: 50%;
+}
+
+.profile__info {
+  margin: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.achievements__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.achievements__badges > img {
+  margin: 0.7rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
