@@ -1,20 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./styles.css";
 
 export default function Home() {
-  // write a useEffect hook to fetch data from the backend
+  const [routines, setRoutines] = useState([]);
 
   useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    setRoutines([
+      "routine 1",
+      "routine 2",
+      "routine 3",
+      "routine 4",
+      "routine 5",
+      "routine 6",
+      "routine 7",
+      "routine 8",
+      "routine 9",
+    ]);
   }, []);
 
   return (
-    <div className="bg-1">
-      <h1>Hello</h1>
-      Test
-    </div>
+    <>
+      <div className="quickstart__wrapper">
+        <button className="button-1">Quick Start</button>
+      </div>
+      <div className="panels__wrapper">
+        {/* map elements from routines into child div elements */}
+        {routines.map((routine, index) => (
+          <div className="panel" key={index}>
+            <h2>{routine}</h2>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

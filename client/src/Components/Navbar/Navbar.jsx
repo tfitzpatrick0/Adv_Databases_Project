@@ -42,19 +42,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-{
-  /* <nav className="navbar">
-<div className="navbar__logo">
-  <img src="your-logo.png" alt="Logo" />
-</div>
-<ul className="navbar__links">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">About</a></li>
-  <li><a href="#">Contact</a></li>
-</ul>
-<div className="navbar__profile">
-  <button>Profile</button>
-</div>
-</nav> */
-}

@@ -1,5 +1,35 @@
 @import "../../assets/global.css";
 
 .bg-1 {
-    background: linear-gradient(90deg, var(--sky-blue), var(--royal));
+  background: linear-gradient(90deg, var(--sky-blue), var(--royal));
+}
+
+/* write css for a div classname="split" that splits the screen into equal parts using cssgrid */
+/* .split {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+} */
+
+/* div that centers a child element. the child element has min-width of 100px
+and a regular width of 40% of the parent div*/
+.quickstart__wrapper {
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* write css for a div that creates repeating grid elements with a width of 400px. any extra elements go on to the next row */
+.panels__wrapper {
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 1rem;
+}
+
+/* child element panel of panels__wrapper should have a gradient gray background and a height of 400px */
+.panel {
+  background: linear-gradient(90deg, gray, lightgray);
+  height: 400px;
 }

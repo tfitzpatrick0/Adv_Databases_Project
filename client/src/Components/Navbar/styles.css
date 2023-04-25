@@ -5,12 +5,12 @@
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(90deg, var(--sky-blue), var(--royal));
-  height: 60px;
+  height: 4rem;
   padding: 0 20px;
 }
 
 .navbar__logo img {
-  height: 40px;
+  height: 3rem;
 }
 
 .navbar__links {
