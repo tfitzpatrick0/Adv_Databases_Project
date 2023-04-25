@@ -8,7 +8,11 @@ import {
 
 import Navbar from "./Navbar/Navbar";
 import Home from "./Home/Home";
+import Exercises from "./Exercises/Exercises";
 import Routines from "./Routines/Routines";
+import Workout from "./Workout/Workout";
+import History from "./History/History";
+import Profile from "./Profile/Profile";
 
 export default function Components() {
   return (
@@ -17,13 +21,11 @@ export default function Components() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/routines" element={<Routines />} />
-          {/* 
-          <Route path="/profile" element={<Profile />} />
           <Route path="/exercises" element={<Exercises />} />
+          <Route path="/routines" element={<Routines />} />
           <Route path="/workout" element={<Workout />} />
           <Route path="/history" element={<History />} />
-          */}
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
