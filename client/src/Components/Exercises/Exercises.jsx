@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import SearchForm from "./SearchForm";
 
 import "./styles.css";
 
@@ -30,12 +31,7 @@ export default function Exercises() {
     // and a list of exercises below that
     <div className="exercises__page-layout">
       <div className="search-bar__wrapper">
-        <input type="text" placeholder="Search..." />
-        <button className="button-1">Body Part</button>
-        <button className="button-1">Difficulty</button>
-        <button className="button-1">Filter 3</button>
-        <button className="button-1">Filter 4</button>
-        <button className="button-1">Filter 5</button>
+        <SearchForm />
       </div>
       <div className="exercises__wrapper">
         {/* map elements from exercises into child div elements */}
