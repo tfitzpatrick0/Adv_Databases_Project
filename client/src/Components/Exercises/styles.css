@@ -1,7 +1,23 @@
 @import "../../assets/global.css";
 
+.exercises__page-layout {
+  padding: 1.5rem;
+  background: linear-gradient(90deg, var(--sky-blue), var(--royal));
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  grid-gap: 1.5rem;
+}
+
+.search-bar__wrapper {
+  padding: 0.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
 .exercises__wrapper {
-  margin: 1rem;
+  padding: 0.5rem;
+  background-color: white;
 }
 
 .exercise {

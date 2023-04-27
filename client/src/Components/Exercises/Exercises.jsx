@@ -31,8 +31,6 @@ export default function Exercises() {
     <div className="exercises__page-layout">
       <div className="search-bar__wrapper">
         <input type="text" placeholder="Search..." />
-      </div>
-      <div className="filters__wrapper">
         <button className="button-1">Body Part</button>
         <button className="button-1">Difficulty</button>
         <button className="button-1">Filter 3</button>
