@@ -1,7 +1,8 @@
 @import "../../assets/global.css";
 
 .exercises__page-layout {
-  height: calc(100vh - 4rem);
+  background-color: #ccc;
+  height: calc(100vh - 3rem);
   padding: 1.5rem;
   display: grid;
   grid-template-columns: 2fr 5fr;

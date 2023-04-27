@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(90deg, var(--sky-blue), var(--royal));
-  height: 4rem;
+  height: 3rem;
   padding: 0 20px;
 }
 
@@ -55,20 +55,21 @@
 }
 
 .nav-spacer {
-  height: 4rem;
+  height: 3rem;
 }
 
 /*-------------Nav-------------*/
 #nav-wrapper {
   overflow: hidden;
   width: 100%;
-  height: 4rem;
+  height: 3rem;
   margin: 0 auto;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100; /* make sure the nav is on top of everything */
   /* border-bottom: 2px solid black; */
+  /* border-bottom: 1px solid var(--royal); */
 }
 
 #nav {
@@ -88,8 +89,8 @@
 
 .nav {
   display: flex;
-  height: 4rem;
-  line-height: 4rem;
+  height: 3rem;
+  line-height: 3rem;
   flex-grow: 1;
 }
 
