@@ -16,18 +16,17 @@
   flex-direction: column;
   /* set the height equal to the child element */
   height: fit-content;
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.25);
-  /* take var(--aqua) and make it rgba with an a value of .15 */
+  /* box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.25); */
+  box-shadow: 0px 0px 10px 5px rgba(0, 100, 222, 0.25);
   /* box-shadow: 0px 0px 5px 5px var(--aqua); */
-  /* box-shadow: 0px 0px 5px 5px rgba(0, 100, 222, 0.3); */
 }
 
 .exercises__wrapper {
   padding: 0.5rem;
   background-color: white;
   overflow-y: scroll;
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.25);
-  /* box-shadow: 0px 0px 5px 5px rgba(0, 100, 222, 0.3); */
+  /* box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.25); */
+  box-shadow: 0px 0px 10px 5px rgba(0, 100, 222, 0.25);
 }
 
 .exercises-title {
