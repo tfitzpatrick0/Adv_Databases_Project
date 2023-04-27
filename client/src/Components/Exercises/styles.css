@@ -3,7 +3,6 @@
 .exercises__page-layout {
   height: calc(100vh - 4rem);
   padding: 1.5rem;
-  background: linear-gradient(90deg, var(--sky-blue), var(--royal));
   display: grid;
   grid-template-columns: 2fr 5fr;
   grid-gap: 1.5rem;
