@@ -53,36 +53,34 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div id="nav-wrapper">
-      <nav id="nav">
-        <div class="nav left">
-          <span class="gradient skew">
-            <Link to="/" onClick={() => setNavActive(0)}>
-              Logo Here
-              {/* <img src={logo} alt="Logo" /> */}
+    <nav id="nav">
+      <div class="nav left">
+        <span class="gradient skew">
+          <Link to="/" onClick={() => setNavActive(0)}>
+            Logo Here
+            {/* <img src={logo} alt="Logo" /> */}
+          </Link>
+        </span>
+      </div>
+      <div class="nav right">
+        {navList.map((navItem, index) =>
+          index === 0 ? (
+            <></>
+          ) : (
+            <Link
+              to={navItem.path}
+              class={`nav-link ${index === navActive ? "active" : ""}`}
+              key={index}
+              onClick={() => setNavActive(index)}
+            >
+              <span class="nav-link-span">
+                <span class="u-nav">{navItem.name}</span>
+              </span>
             </Link>
-          </span>
-        </div>
-        <div class="nav right">
-          {navList.map((navItem, index) =>
-            index === 0 ? (
-              <></>
-            ) : (
-              <Link
-                to={navItem.path}
-                class={`nav-link ${index === navActive ? "active" : ""}`}
-                key={index}
-                onClick={() => setNavActive(index)}
-              >
-                <span class="nav-link-span">
-                  <span class="u-nav">{navItem.name}</span>
-                </span>
-              </Link>
-            )
-          )}
-        </div>
-      </nav>
-    </div>
+          )
+        )}
+      </div>
+    </nav>
     // <nav className="navbar">
     //   <Link to="/">
     //     <div className="navbar__logo">
