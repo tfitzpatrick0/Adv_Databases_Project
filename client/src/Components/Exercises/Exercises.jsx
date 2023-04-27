@@ -23,6 +23,9 @@ export default function Exercises() {
       "exercise 13",
       "exercise 14",
       "exercise 15",
+      "exercise 16",
+      "exercise 17",
+      "exercise 18",
     ]);
   }, []);
 
@@ -39,10 +42,13 @@ export default function Exercises() {
         <SearchForm />
       </div>
       <div className="exercises__wrapper">
+        <div className="center">
+          <h1 className="exercises-title">EXERCISES</h1>
+        </div>
         {/* map elements from exercises into child div elements */}
         {exercises.map((exercise, index) => (
           <div className="exercise bg-1" key={index}>
-            <h2>{exercise}</h2>
+            <h3>{exercise}</h3>
           </div>
         ))}
       </div>

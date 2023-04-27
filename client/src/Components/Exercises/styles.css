@@ -1,6 +1,7 @@
 @import "../../assets/global.css";
 
 .exercises__page-layout {
+  height: 100vh;
   padding: 1.5rem;
   background: linear-gradient(90deg, var(--sky-blue), var(--royal));
   display: grid;
@@ -13,20 +14,27 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+  /* set the height equal to the child element */
+  height: fit-content;
 }
 
 .exercises__wrapper {
   padding: 0.5rem;
   background-color: white;
+  overflow-y: scroll;
+}
+
+.exercises-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .exercise {
-  height: 3rem;
-  margin-bottom: 1rem;
+  height: 2.5rem;
   padding: 1rem;
   display: flex;
   align-items: center;
-  border-radius: 5px;
+  border-bottom: 1px solid white;
 }
 
 /* SEARCH FORM */
