@@ -1,7 +1,7 @@
 @import "../../assets/global.css";
 
 .exercises__page-layout {
-  height: 100vh;
+  height: calc(100vh - 4rem);
   padding: 1.5rem;
   background: linear-gradient(90deg, var(--sky-blue), var(--royal));
   display: grid;
