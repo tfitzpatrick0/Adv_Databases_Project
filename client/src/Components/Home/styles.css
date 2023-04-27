@@ -6,10 +6,21 @@
   grid-template-columns: 2fr 1fr;
 } */
 
+/* write css for .homepage that pulls in the image gym_setup.jpg from assets
+makes it black and white, and sets it as the background at 100% width */
+.homepage {
+  /* background: url("../../assets/gym_setup.jpg") no-repeat center center fixed; */
+  background: url("../../assets/gym_setup.jpg");
+  background-size: cover;
+  filter: grayscale(100%);
+  height: 100vh;
+  width: 100%;
+}
+
 /* div that centers a child element. the child element has min-width of 100px
 and a regular width of 40% of the parent div*/
 .quickstart__wrapper {
-  margin: 1rem auto;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

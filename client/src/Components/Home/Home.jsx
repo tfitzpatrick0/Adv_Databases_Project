@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="homepage">
       <div className="quickstart__wrapper">
         <button className="button-1">Quick Start</button>
       </div>
@@ -32,6 +32,6 @@ export default function Home() {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
