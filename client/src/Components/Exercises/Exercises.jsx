@@ -18,6 +18,11 @@ export default function Exercises() {
       "exercise 8",
       "exercise 9",
       "exercise 10",
+      "exercise 11",
+      "exercise 12",
+      "exercise 13",
+      "exercise 14",
+      "exercise 15",
     ]);
   }, []);
 
