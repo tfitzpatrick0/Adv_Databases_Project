@@ -20,6 +20,11 @@ export default function Exercises() {
     ]);
   }, []);
 
+  // search bar left side, filter button right side
+  // pressing the filter button creates an area under the search bar with possible filters
+  // pressing a filter button loads a dropdown menu with possible filter options
+  // exercises are displayed in a grid below the search bar and filters
+
   return (
     // create an html layout that contains a search bar at the top, with a row of filters underdeath
     // and a list of exercises below that
@@ -28,8 +33,8 @@ export default function Exercises() {
         <input type="text" placeholder="Search..." />
       </div>
       <div className="filters__wrapper">
-        <button className="button-1">Filter 1</button>
-        <button className="button-1">Filter 2</button>
+        <button className="button-1">Body Part</button>
+        <button className="button-1">Difficulty</button>
         <button className="button-1">Filter 3</button>
         <button className="button-1">Filter 4</button>
         <button className="button-1">Filter 5</button>
