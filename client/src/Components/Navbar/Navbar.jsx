@@ -65,22 +65,32 @@ export default function Navbar() {
             </span>
           </div>
           <div class="nav right">
-            {navList.map((navItem, index) =>
-              index === 0 ? (
-                <></>
-              ) : (
-                <Link
-                  to={navItem.path}
-                  class={`nav-link ${index === navActive ? "active" : ""}`}
-                  key={index}
-                  onClick={() => setNavActive(index)}
-                >
-                  <span class="nav-link-span">
-                    <span class="u-nav">{navItem.name}</span>
-                  </span>
-                </Link>
-              )
-            )}
+            {navList.map((navItem, index) => (
+              // index === 0 ? (
+              //   <></>
+              // ) : (
+              //   <Link
+              //     to={navItem.path}
+              //     class={`nav-link ${index === navActive ? "active" : ""}`}
+              //     key={index}
+              //     onClick={() => setNavActive(index)}
+              //   >
+              //     <span class="nav-link-span">
+              //       <span class="u-nav">{navItem.name}</span>
+              //     </span>
+              //   </Link>
+              // )
+              <Link
+                to={navItem.path}
+                class={`nav-link ${index === navActive ? "active" : ""}`}
+                key={index}
+                onClick={() => setNavActive(index)}
+              >
+                <span class="nav-link-span">
+                  <span class="u-nav">{navItem.name}</span>
+                </span>
+              </Link>
+            ))}
           </div>
         </nav>
       </div>
