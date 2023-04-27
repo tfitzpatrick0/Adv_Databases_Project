@@ -39,15 +39,12 @@ export default function Navbar() {
     // get the current path
     const currentPath = window.location.pathname;
     // loop through navList
-    if (currentPath === "/") {
-      setNavActive(-1);
-    } else {
-      for (let i = 0; i < navList.length; i++) {
-        // if the current path matches the path in navList
-        if (currentPath === navList[i].path) {
-          // set navActive to the index of the current path
-          setNavActive(i);
-        }
+
+    for (let i = 0; i < navList.length; i++) {
+      // if the current path matches the path in navList
+      if (currentPath === navList[i].path) {
+        // set navActive to the index of the current path
+        setNavActive(i);
       }
     }
   }, []);

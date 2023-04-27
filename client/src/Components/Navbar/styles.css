@@ -106,12 +106,12 @@ span.gradient {
   right: 1em;
   margin-right: auto;
 }
-span.gradient:hover {
+/* span.gradient:hover {
   animation-name: logo-hover;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.17, 0.57, 0.31, 0.85);
-}
+} */
 
 h1.logo {
   font-weight: 300;
