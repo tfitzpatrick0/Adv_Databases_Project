@@ -57,12 +57,10 @@ export default function Navbar() {
       <nav id="nav">
         <div class="nav left">
           <span class="gradient skew">
-            <h1 class="logo un-skew">
-              <Link to="/" onClick={() => setNavActive(0)}>
-                Logo Here
-                {/* <img src={logo} alt="Logo" /> */}
-              </Link>
-            </h1>
+            <Link to="/" onClick={() => setNavActive(0)}>
+              Logo Here
+              {/* <img src={logo} alt="Logo" /> */}
+            </Link>
           </span>
         </div>
         <div class="nav right">
@@ -82,11 +80,6 @@ export default function Navbar() {
               </Link>
             )
           )}
-          {/* <Link to={navItem.path} class="nav-link" key={index}>
-            <span class="nav-link-span">
-              <span class="u-nav">{navItem.name}</span>
-            </span>
-          </Link> */}
         </div>
       </nav>
     </div>

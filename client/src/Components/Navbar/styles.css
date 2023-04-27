@@ -1,6 +1,6 @@
-/* @import "../../assets/global.css";
+@import "../../assets/global.css";
 
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,23 +49,6 @@
   color: #fff;
 } */
 
-/*-------------Reset-------------*/
-button {
-  background: none;
-  box-shadow: none;
-  border: none;
-  cursor: pointer;
-}
-
-button:focus,
-input:focus {
-  outline: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 /*-------------Layout-------------*/
 body {
   line-height: 1.5em;
@@ -77,29 +60,9 @@ section {
   height: 100vh;
 }
 
-#home {
-  background-color: #ddd;
-}
-
-#about {
-  background-color: #aaa;
-}
-
-#work {
-  background-color: #888;
-}
-
-#contact {
-  background-color: #666;
-}
-
 /*-------------Helpers-------------*/
 .skew {
   transform: skew(-20deg);
-}
-
-.un-skew {
-  transform: skew(20deg);
 }
 
 /*-------------Nav-------------*/
@@ -119,9 +82,10 @@ section {
   display: flex;
   flex-direction: column;
   font-family: "Saira Semi Condensed", sans-serif;
-  height: 4em;
+  height: 4rem;
   overflow: hidden;
 }
+
 #nav.nav-visible {
   height: 100%;
   overflow: auto;
@@ -140,9 +104,9 @@ section {
 }
 
 span.gradient {
-  background: #f857a8;
-  background: -webkit-linear-gradient(45deg, #f857a8, #ff5858);
-  background: linear-gradient(45deg, #f857a8, #ff5858);
+  background: var(--sky-blue);
+  background: -webkit-linear-gradient(45deg, var(--sky-blue), var(--royal));
+  background: linear-gradient(45deg, var(--sky-blue), var(--royal));
   padding: 0 1em;
   position: relative;
   right: 1em;
@@ -180,7 +144,7 @@ a:link,
 a:visited,
 a:active {
   text-decoration: none;
-  color: #f857a8;
+  color: var(--sky-blue);
 }
 
 a:hover {
@@ -194,15 +158,15 @@ a:hover {
 }
 
 .btn-nav {
-  color: #f857a8;
+  color: var(--sky-blue);
   padding-left: 2em;
   padding-right: 2em;
 }
 
 @media (min-width: 800px) {
-  #nav-wrapper {
+  /* #nav-wrapper {
     overflow: hidden;
-  }
+  } */
 
   #nav {
     overflow: hidden;
@@ -229,9 +193,9 @@ a:hover {
   .nav a:link.active,
   a:visited.active,
   a:active.active {
-    background: #f857a8;
-    background: -webkit-linear-gradient(45deg, #f857a8, #ff5858);
-    background: linear-gradient(45deg, #f857a8, #ff5858);
+    background: var(--sky-blue);
+    background: -webkit-linear-gradient(45deg, var(--sky-blue), var(--royal));
+    background: linear-gradient(45deg, var(--sky-blue), var(--royal));
     color: #fff;
   }
 
