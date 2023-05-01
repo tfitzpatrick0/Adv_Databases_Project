@@ -39,12 +39,20 @@ export default function Routines() {
     ]);
   }, []);
 
+  // create a function handleAddRoutine() that adds a routine to the list of routines
+  const handleAddRoutine = () => {
+    let newRoutine = "routine test";
+    setRoutines([...routines, newRoutine]);
+  };
+
   return (
     <div className="routines__page-layout bg-1">
       <div className="user-routines__wrapper">
         <div className="user-routines-title">
           <h1>MY ROUTINES</h1>
-          <button className="button-1">Add Routine</button>
+          <button className="button-1" onClick={() => handleAddRoutine()}>
+            Add Routine
+          </button>
         </div>
         <div className="user-routines__body">
           {/* Want to add an on click routine dropdown with more info */}

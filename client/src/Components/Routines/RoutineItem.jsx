@@ -6,19 +6,14 @@ export default function RoutineItem({ routine }) {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className="routine-item bg-2">
-      <div className="routine-item__header">
+    <div className="routine-item__wrapper bg-2">
+      <div>
         <h2>{routine}</h2>
-        <button
-          className="routine-item__header__button"
-          onClick={() => setIsOpened(!isOpened)}
-        >
-          {isOpened ? "Close" : "Open"}
-        </button>
+        <button onClick={() => setIsOpened(!isOpened)}>Edit</button>
       </div>
       {isOpened && (
-        <div className="popup-box">
-          <div className="box">
+        <div className="routine-item__popup-wrapper">
+          <div className="routine-item__popup-body">
             <span className="close-icon" onClick={() => setIsOpened(!isOpened)}>
               x
             </span>

@@ -9,24 +9,25 @@
   grid-gap: 1.5rem;
 }
 
-.workout__header {
+.start-workout__wrapper {
   padding: 0.5rem;
   background-color: white;
   height: fit-content;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
-.workout__wrapper {
+.workout-exercises__wrapper {
   padding: 0.5rem;
   background-color: white;
 }
 
-.workout-timer {
+.start-workout-timer {
   display: flex;
 }
 
-.workout-timer > * {
+.start-workout-timer > * {
   margin: 0 1rem;
 }

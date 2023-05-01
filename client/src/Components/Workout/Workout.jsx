@@ -21,16 +21,17 @@ export default function Workout() {
     // and a start workout button and end workout button at the top right
     // and a list of exercises below that
     <div className="workout__page-layout bg-1">
-      <div className="workout__header">
-        <div className="workout-title">
+      <div className="start-workout__wrapper">
+        <div className="start-workout-routine-name">
           <h1>Routine 1 - 00:00</h1>
         </div>
-        <div className="workout-timer">
+        <h2>Select Routine</h2>
+        <div className="start-workout-timer">
           <button className="button-1">Start Workout</button>
           <button className="button-1">End Workout</button>
         </div>
       </div>
-      <div className="workout__wrapper">
+      <div className="workout-exercises__wrapper">
         <div className="panels__wrapper-2">
           {/* map elements from exercises into child div elements */}
           {exercises.map((exercise, index) => (
