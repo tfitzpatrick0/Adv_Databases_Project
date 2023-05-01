@@ -47,7 +47,7 @@ export default function Exercises() {
         </div>
         {/* map elements from exercises into child div elements */}
         {exercises.map((exercise, index) => (
-          <div className="exercise bg-1" key={index}>
+          <div className="exercise bg-2" key={index}>
             <h3>{exercise}</h3>
           </div>
         ))}
