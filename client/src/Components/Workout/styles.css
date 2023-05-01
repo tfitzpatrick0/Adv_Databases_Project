@@ -1,13 +1,32 @@
 @import "../../assets/global.css";
 
 /* write css for .workout__header that pushes child elements to the left and right side of the page */
+.workout__page-layout {
+  height: calc(100vh - 4rem);
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  grid-gap: 1.5rem;
+}
+
 .workout__header {
+  padding: 0.5rem;
+  background-color: white;
+  height: fit-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
 }
 
-.wb {
-  margin-right: 1rem;
+.workout__wrapper {
+  padding: 0.5rem;
+  background-color: white;
+}
+
+.workout-timer {
+  display: flex;
+}
+
+.workout-timer > * {
+  margin: 0 1rem;
 }

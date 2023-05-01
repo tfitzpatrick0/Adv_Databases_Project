@@ -44,7 +44,7 @@ export default function Routines() {
       <div className="user-routines__wrapper">
         <div className="user-routines-title">
           <h1>MY ROUTINES</h1>
-          <button>Add Routine</button>
+          <button className="button-1">Add Routine</button>
         </div>
         <div className="user-routines__body">
           {/* Want to add an on click routine dropdown with more info */}

@@ -21,6 +21,8 @@ export default function Components() {
   return (
     <div>
       <Router>
+        {/* Can wrap auth routes and app routes in separate routing components
+        --> the app routes will have Navbar and the auth routes won't */}
         <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
