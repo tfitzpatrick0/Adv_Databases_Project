@@ -6,7 +6,7 @@ export default function RoutineItem({ routine }) {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className="routine-item bg-1">
+    <div className="routine-item bg-2">
       <div className="routine-item__header">
         <h2>{routine}</h2>
         <button

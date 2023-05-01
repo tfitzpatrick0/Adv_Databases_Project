@@ -1,24 +1,24 @@
 @import "../../assets/global.css";
 
 .routines__page-layout {
+  height: calc(100vh - 4rem);
+  padding: 1.5rem;
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-gap: 1rem;
+  grid-gap: 1.5rem;
 }
 
 .user-routines__wrapper {
-  height: 100vh;
+  padding: 0.5rem;
+  background-color: white;
   overflow-y: scroll;
-  margin: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-gap: 1rem;
 }
 
 .rec-routines__wrapper {
-  height: 100vh;
   overflow-y: scroll;
-  margin: 1rem;
 }
 
 .routine {

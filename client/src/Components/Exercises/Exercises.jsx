@@ -37,8 +37,8 @@ export default function Exercises() {
   return (
     // create an html layout that contains a search bar at the top, with a row of filters underdeath
     // and a list of exercises below that
-    <div className="exercises__page-layout bg-2">
-      <div className="search-bar__wrapper">
+    <div className="exercises__page-layout bg-1">
+      <div className="search-form__wrapper">
         <SearchForm />
       </div>
       <div className="exercises__wrapper">

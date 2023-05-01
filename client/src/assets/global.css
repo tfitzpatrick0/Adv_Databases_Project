@@ -41,11 +41,11 @@ body {
 }
 
 .bg-1 {
-  background: linear-gradient(90deg, gray, lightgray);
+  background: linear-gradient(90deg, var(--sky-blue), var(--royal));
 }
 
 .bg-2 {
-  background: linear-gradient(90deg, var(--sky-blue), var(--royal));
+  background: linear-gradient(90deg, gray, lightgray);
 }
 
 /* write css for a div that creates repeating grid elements with a width of 400px. any extra elements go on to the next row */
