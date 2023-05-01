@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import RoutineItem from "./RoutineItem";
 
 import "./styles.css";
 
@@ -43,9 +44,10 @@ export default function Routines() {
       <div className="user-routines__wrapper">
         {/* Want to add an on click routine dropdown with more info */}
         {routines.map((routine, index) => (
-          <div className="routine bg-1" key={index}>
-            <h2>{routine}</h2>
-          </div>
+          // <div className="routine bg-1" key={index}>
+          //   <h2>{routine}</h2>
+          // </div>
+          <RoutineItem routine={routine} key={index} />
         ))}
       </div>
       <div className="rec-routines__wrapper">
