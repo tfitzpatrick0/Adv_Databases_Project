@@ -32,7 +32,7 @@ export default function Navbar() {
     },
   ];
 
-  const [navActive, setNavActive] = useState(0);
+  const [navActive, setNavActive] = useState(-1);
 
   // useEffect to set navActive to the index of the current path
   useEffect(() => {

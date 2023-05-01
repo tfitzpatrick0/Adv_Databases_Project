@@ -14,12 +14,17 @@ import Workout from "./Workout/Workout";
 import History from "./History/History";
 import Profile from "./Profile/Profile";
 
+import Login from "./Auth/Login";
+import Register from "./Auth/Register";
+
 export default function Components() {
   return (
     <div>
       <Router>
         <Navbar />
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
           <Route path="/exercises" element={<Exercises />} />
           <Route path="/routines" element={<Routines />} />
