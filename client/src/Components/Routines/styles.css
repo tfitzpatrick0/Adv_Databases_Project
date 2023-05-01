@@ -72,11 +72,12 @@
   overflow: auto;
 }
 
-.popup__header {
+.popup__routine-item-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  padding: 0 1rem 1rem 1rem;
+  border-bottom: 2px solid var(--sky-blue);
 }
 
 /* .close-icon {
