@@ -42,6 +42,7 @@ export default function RoutineItem({ routine }) {
                 </div>
               ))}
             </div>
+            <button className="button-1">Add Exercises</button>
           </div>
         </div>
       )}
