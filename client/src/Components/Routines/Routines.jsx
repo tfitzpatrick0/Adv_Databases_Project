@@ -42,13 +42,19 @@ export default function Routines() {
   return (
     <div className="routines__page-layout bg-1">
       <div className="user-routines__wrapper">
-        {/* Want to add an on click routine dropdown with more info */}
-        {routines.map((routine, index) => (
-          // <div className="routine bg-1" key={index}>
-          //   <h2>{routine}</h2>
-          // </div>
-          <RoutineItem routine={routine} key={index} />
-        ))}
+        <div className="user-routines-title">
+          <h1>MY ROUTINES</h1>
+          <button>Add Routine</button>
+        </div>
+        <div className="user-routines__body">
+          {/* Want to add an on click routine dropdown with more info */}
+          {routines.map((routine, index) => (
+            // <div className="routine bg-1" key={index}>
+            //   <h2>{routine}</h2>
+            // </div>
+            <RoutineItem routine={routine} key={index} />
+          ))}
+        </div>
       </div>
       <div className="rec-routines__wrapper">
         {recRoutines.map((routine, index) => (

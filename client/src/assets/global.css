@@ -72,9 +72,3 @@ body {
 .panel-2 {
   height: 200px;
 }
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
