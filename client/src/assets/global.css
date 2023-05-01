@@ -7,6 +7,7 @@
   --blue: #052df5;
   --royal: #1b00de;
   --purple: #6900fc;
+  --page-height: calc(100vh - 4rem);
 }
 
 * {

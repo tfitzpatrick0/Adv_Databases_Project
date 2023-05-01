@@ -1,7 +1,7 @@
 @import "../../assets/global.css";
 
 .exercises__page-layout {
-  height: calc(100vh - 4rem);
+  height: var(--page-height);
   padding: 1.5rem;
   display: grid;
   grid-template-columns: 2fr 5fr;

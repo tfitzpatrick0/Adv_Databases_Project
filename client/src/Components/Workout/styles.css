@@ -2,7 +2,7 @@
 
 /* write css for .workout__header that pushes child elements to the left and right side of the page */
 .workout__page-layout {
-  height: calc(100vh - 4rem);
+  height: var(--page-height);
   padding: 1.5rem;
   display: grid;
   grid-template-columns: 2fr 5fr;

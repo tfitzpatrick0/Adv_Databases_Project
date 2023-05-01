@@ -12,12 +12,23 @@ export default function RoutineItem({ routine }) {
         <button onClick={() => setIsOpened(!isOpened)}>Edit</button>
       </div>
       {isOpened && (
-        <div className="routine-item__popup-wrapper">
-          <div className="routine-item__popup-body">
-            <span className="close-icon" onClick={() => setIsOpened(!isOpened)}>
+        <div className="popup__routine-item__wrapper">
+          <div className="popup__routine-item__body">
+            {/* <span className="close-icon" onClick={() => setIsOpened(!isOpened)}>
               x
-            </span>
-            {routine} is opened
+            </span> */}
+            <div className="popup__header">
+              <h1>{routine}</h1>
+              <div>
+                <button className="button-1">Save</button>
+                <button
+                  className="button-2"
+                  onClick={() => setIsOpened(!isOpened)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
