@@ -1,49 +1,89 @@
 import React, { useState } from "react";
 
+import Exercises from "../Exercises/Exercises";
+
 import "./styles.css";
 
-export default function RoutineItem({ routine }) {
-  const [isOpened, setIsOpened] = useState(false);
-  const [exercises, setExercises] = useState([
-    "exercise 1",
-    "exercise 2",
-    "exercise 3",
-  ]);
+export default function RoutineItem({
+  routine,
+  handleStartWorkout,
+  handleAddExercise,
+}) {
+  const [showRoutineItem, setShowRoutineItem] = useState(false);
+  const [showExercises, setShowExercises] = useState(false);
+
+  // const [exercises, setExercises] = useState([
+  //   "exercise 1",
+  //   "exercise 2",
+  //   "exercise 3",
+  // ]);
+
+  const selectExercise = (exerciseName) => {
+    console.log("SELECTED EXERCISE: ", exerciseName);
+    setShowExercises(!showExercises);
+    handleAddExercise(routine, exerciseName);
+  };
 
   return (
     <div className="routine-item__wrapper bg-2">
       <div>
-        <h2>{routine}</h2>
-        <button onClick={() => setIsOpened(!isOpened)}>Edit</button>
+        <h2>{routine.name}</h2>
+        <button onClick={() => setShowRoutineItem(!showRoutineItem)}>
+          Edit
+        </button>
       </div>
-      {isOpened && (
+      {showRoutineItem && (
         <div className="popup__routine-item__wrapper">
           <div className="popup__routine-item__body">
-            {/* <span className="close-icon" onClick={() => setIsOpened(!isOpened)}>
+            {/* <span className="close-icon" onClick={() => setShowRoutineItem(!showRoutineItem)}>
               x
             </span> */}
             <div className="popup__routine-item-header">
-              <h1>{routine}</h1>
+              <h1>{routine.name}</h1>
               <div>
+                <button
+                  className="button-1"
+                  onClick={() => handleStartWorkout(routine)}
+                >
+                  GO TO WORKOUT
+                </button>
                 <button className="button-1">Save</button>
                 <button
                   className="button-2"
-                  onClick={() => setIsOpened(!isOpened)}
+                  onClick={() => setShowRoutineItem(!showRoutineItem)}
                 >
                   Close
                 </button>
               </div>
             </div>
             <div className="popup__routine-item-exercises">
-              {exercises.map((exercise, index) => (
+              {routine.exercises.map((exercise, index) => (
                 <div key={index}>
-                  <h2>{exercise}</h2>
+                  <h2>{exercise.exercise.name}</h2>
+                  <h3>
+                    {exercise.exercise.sets} | {exercise.exercise.reps} |{" "}
+                    {exercise.exercise.weight}
+                  </h3>
                   <button>Edit</button>
                 </div>
               ))}
             </div>
-            <button className="button-1">Add Exercises</button>
+            <button
+              className="button-1"
+              // make the functionality onClick={() => setShowExercises(!showExercises)} and also setShowRoutineItem(!showRoutineItem)
+              onClick={() => setShowExercises(!showExercises)}
+            >
+              Add Exercises
+            </button>
           </div>
+        </div>
+      )}
+      {showExercises && (
+        <div className="popup__routine-item__wrapper">
+          <button onClick={() => setShowExercises(!showExercises)}>
+            Close
+          </button>
+          <Exercises onExerciseClick={selectExercise} />
         </div>
       )}
     </div>

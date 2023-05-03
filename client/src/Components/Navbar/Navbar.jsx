@@ -53,38 +53,38 @@ export default function Navbar() {
     <>
       <div id="nav-wrapper">
         <nav id="nav">
-          <div class="nav left">
-            <span class="gradient skew">
+          <div className="nav left">
+            <span className="gradient skew">
               <Link to="/" onClick={() => setNavActive(0)}>
                 GOD TIER GAINS
                 {/* <img src={logo} alt="Logo" /> */}
               </Link>
             </span>
           </div>
-          <div class="nav right">
+          <div className="nav right">
             {navList.map((navItem, index) => (
               // index === 0 ? (
               //   <></>
               // ) : (
               //   <Link
               //     to={navItem.path}
-              //     class={`nav-link ${index === navActive ? "active" : ""}`}
+              //     className={`nav-link ${index === navActive ? "active" : ""}`}
               //     key={index}
               //     onClick={() => setNavActive(index)}
               //   >
-              //     <span class="nav-link-span">
-              //       <span class="u-nav">{navItem.name}</span>
+              //     <span className="nav-link-span">
+              //       <span className="u-nav">{navItem.name}</span>
               //     </span>
               //   </Link>
               // )
               <Link
                 to={navItem.path}
-                class={`nav-link ${index === navActive ? "active" : ""}`}
+                className={`nav-link ${index === navActive ? "active" : ""}`}
                 key={index}
                 onClick={() => setNavActive(index)}
               >
-                <span class="nav-link-span">
-                  <span class="u-nav">{navItem.name}</span>
+                <span className="nav-link-span">
+                  <span className="u-nav">{navItem.name}</span>
                 </span>
               </Link>
             ))}

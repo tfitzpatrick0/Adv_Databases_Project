@@ -52,6 +52,7 @@
   width: 100%;
   height: var(--page-height);
   top: 4rem;
+  padding: 1rem;
   left: 0;
 }
 
