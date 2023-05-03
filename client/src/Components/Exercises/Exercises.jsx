@@ -3,7 +3,7 @@ import SearchForm from "./SearchForm";
 
 import "./styles.css";
 
-export default function Exercises() {
+export default function Exercises({ onExerciseClick }) {
   const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
@@ -47,7 +47,12 @@ export default function Exercises() {
         </div>
         {/* map elements from exercises into child div elements */}
         {exercises.map((exercise, index) => (
-          <div className="exercise bg-2" key={index}>
+          // ternary operator --> is onExerciseClick defined? if so, pass it to the child div element
+          <div
+            className="exercise bg-2"
+            onClick={onExerciseClick ? () => onExerciseClick(exercise) : null}
+            key={index}
+          >
             <h3>{exercise}</h3>
           </div>
         ))}

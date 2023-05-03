@@ -13,17 +13,17 @@ export default function SearchForm() {
     //   <button className="button-1">Filter 5</button>
     // </div>
     <form>
-      <div class="inner-form">
-        <div class="basic-search">
-          <div class="input-field">
+      <div className="inner-form">
+        <div className="basic-search">
+          <div className="input-field">
             <input id="search" type="text" placeholder="Type Keywords" />
           </div>
         </div>
-        <div class="advance-search">
-          <span class="desc">ADVANCED SEARCH</span>
-          <div class="row">
-            <div class="input-field">
-              <div class="input-select">
+        <div className="advance-search">
+          <span className="desc">ADVANCED SEARCH</span>
+          <div className="row">
+            <div className="input-field">
+              <div className="input-select">
                 <select data-trigger="" name="choices-single-defaul">
                   <option placeholder="" value="">
                     Accessories
@@ -33,8 +33,8 @@ export default function SearchForm() {
                 </select>
               </div>
             </div>
-            <div class="input-field">
-              <div class="input-select">
+            <div className="input-field">
+              <div className="input-select">
                 <select data-trigger="" name="choices-single-defaul">
                   <option placeholder="" value="">
                     Color
@@ -44,8 +44,8 @@ export default function SearchForm() {
                 </select>
               </div>
             </div>
-            <div class="input-field">
-              <div class="input-select">
+            <div className="input-field">
+              <div className="input-select">
                 <select data-trigger="" name="choices-single-defaul">
                   <option placeholder="" value="">
                     Size
@@ -56,9 +56,9 @@ export default function SearchForm() {
               </div>
             </div>
           </div>
-          <div class="row second">
-            <div class="input-field">
-              <div class="input-select">
+          <div className="row second">
+            <div className="input-field">
+              <div className="input-select">
                 <select data-trigger="" name="choices-single-defaul">
                   <option placeholder="" value="">
                     Sale
@@ -68,8 +68,8 @@ export default function SearchForm() {
                 </select>
               </div>
             </div>
-            <div class="input-field">
-              <div class="input-select">
+            <div className="input-field">
+              <div className="input-select">
                 <select data-trigger="" name="choices-single-defaul">
                   <option placeholder="" value="">
                     Time
@@ -82,8 +82,8 @@ export default function SearchForm() {
                 </select>
               </div>
             </div>
-            <div class="input-field">
-              <div class="input-select">
+            <div className="input-field">
+              <div className="input-select">
                 <select data-trigger="" name="choices-single-defaul">
                   <option placeholder="" value="">
                     Type
@@ -94,16 +94,16 @@ export default function SearchForm() {
               </div>
             </div>
           </div>
-          <div class="row third">
-            <div class="input-field">
-              <div class="result-count">
+          <div className="row third">
+            <div className="input-field">
+              <div className="result-count">
                 <span>108 </span>results
               </div>
-              <div class="group-btn">
-                <button class="btn-delete" id="delete">
+              <div className="group-btn">
+                <button className="btn-delete" id="delete">
                   RESET
                 </button>
-                <button class="btn-search">SEARCH</button>
+                <button className="btn-search">SEARCH</button>
               </div>
             </div>
           </div>
