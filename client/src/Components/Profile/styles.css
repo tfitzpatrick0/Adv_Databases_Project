@@ -1,7 +1,21 @@
 @import "../../assets/global.css";
 
+.profile__page-layout {
+  width: 50%;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.profile__wrapper {
+  height: calc(var(--page-height) - 3rem);
+  padding: 1rem;
+  background-color: white;
+  overflow-y: scroll;
+}
+
 .profile__header {
   display: flex;
+  justify-content: center;
   align-items: center;
   margin: 1rem;
 }
@@ -11,10 +25,30 @@
   border-radius: 50%;
 }
 
+.profile__header-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-username {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
 .profile__info {
   margin: 1.5rem;
   display: flex;
   flex-direction: column;
+}
+
+.achievements__header {
+  margin: 1.5rem;
+}
+.achievements__info {
+  margin: 1.5rem;
 }
 
 .achievements__badges {
