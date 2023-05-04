@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../Services/AuthService.js";
+import axios from "axios";
 import RegisterForm from "./RegisterForm";
+
+import {
+  getMaxIdRoute,
+  checkExistingUserRoute,
+  validateUPRoute,
+  insertNewUserRoute,
+} from "../../utils/api";
 
 import "./styles.css";
 
@@ -11,7 +18,7 @@ export default function Register() {
   const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -20,21 +27,55 @@ export default function Register() {
 
   useEffect(() => {
     if (newUser && add) {
-      createUser(newUser).then((userCreated) => {
-        if (userCreated) {
-          alert(
-            `${userCreated.get("firstName")}, you successfully registered!`
-          );
-          navigate("/");
-        }
-        setAdd(false);
-      });
+      console.log("New User: ", newUser);
+      let newId = 20003;
+      console.log("new id: ", newId);
+
+      // axios.get(getMaxIdRoute).then((res) => {
+      //   console.log("Max ID: ", res.data);
+      //   newId = parseInt(res.data[0]) + 1;
+      //   console.log("New ID: ", newId);
+      // });
+
+      // axios
+      //   .post(checkExistingUserRoute, { username: newUser.username })
+      //   .then((res) => {
+      //     console.log("Existing User: ", res.data);
+      //     if (res.data.length > 0) {
+      //       alert("Username already exists!");
+      //       // setAdd(false);
+      //       return;
+      //     }
+      //   });
+
+      axios
+        .post(insertNewUserRoute, {
+          userid: newId,
+          username: newUser.username,
+          passwd: newUser.password,
+        })
+        .then((res) => {
+          console.log("New User successfully registered!");
+          localStorage.setItem("uid", newId);
+          // navigate("/");
+          setAdd(false);
+        });
+
+      // createUser(newUser).then((userCreated) => {
+      //   if (userCreated) {
+      //     alert(
+      //       `${userCreated.get("firstName")}, you successfully registered!`
+      //     );
+      //     navigate("/");
+      //   }
+      //   setAdd(false);
+      // });
     }
   }, [newUser, add]);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
-    console.log(e.target);
+    // console.log(e.target);
 
     const { name, value: newValue } = e.target;
     console.log(newValue);

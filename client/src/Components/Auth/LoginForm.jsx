@@ -13,10 +13,10 @@ export default function LoginForm({ user, onChange, onSubmit }) {
           <form className="userinfo-form" onSubmit={onSubmit}>
             <input
               className="userinfo-input"
-              type="email"
+              type="text"
               value={user.email}
-              name="email"
-              placeholder="Username (Email)"
+              name="username"
+              placeholder="Username"
               onChange={onChange}
               required
             />

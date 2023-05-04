@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../Services/AuthService.js";
+import axios from "axios";
 import LoginForm from "./LoginForm";
+
+import { validateUPRoute } from "../../utils/api";
 
 import "./styles.css";
 
@@ -9,7 +11,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [currUser, setCurrUser] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -18,14 +20,33 @@ export default function Login() {
 
   useEffect(() => {
     if (currUser && add) {
-      loginUser(currUser).then((userValidated) => {
-        if (userValidated) {
-          alert(`${userValidated.get("email")} has logged in!`);
-          console.log("session token: ", userValidated.getSessionToken());
-          navigate("/");
-        }
-        setAdd(false);
-      });
+      console.log("Current User: ", currUser);
+
+      axios
+        .post(validateUPRoute, {
+          username: currUser.username,
+          passwd: currUser.password,
+        })
+        .then((res) => {
+          if (res.data.length > 0) {
+            console.log("User Validated: ", res.data);
+            localStorage.setItem("uid", res.data[0][0]);
+            navigate("/");
+          } else {
+            alert("Invalid username or password!");
+          }
+        });
+
+      setAdd(false);
+
+      //   loginUser(currUser).then((userValidated) => {
+      //     if (userValidated) {
+      //       alert(`${userValidated.get("email")} has logged in!`);
+      //       console.log("session token: ", userValidated.getSessionToken());
+      //       navigate("/");
+      //     }
+      //     setAdd(false);
+      //   });
     }
   }, [currUser, add]);
 

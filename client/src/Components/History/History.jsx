@@ -6,7 +6,7 @@ import { getHistoryRoute } from "../../utils/api";
 import "./styles.css";
 
 export default function History() {
-  const [history, setHistory] = useState();
+  const [history, setHistory] = useState([]);
   const [date, setDate] = useState();
   const [routine, setRoutine] = useState();
 
@@ -16,17 +16,24 @@ export default function History() {
 
     axios.get(getHistoryRoute + uid).then((res) => {
       console.log("History Data: ", res.data);
-      setHistory(res.data[0][0]);
-      setDate(res.data[0][1]);
-      setRoutine(res.data[0][2]);
+      // setHistory(res.data[0][0]);
+      // setDate(res.data[0][1]);
+      // setRoutine(res.data[0][2]);
+      setHistory(res.data);
     });
   }, []);
 
   return (
     <div>
-      <h1>HISTORY: {history}</h1>
+      {/* <h1>HISTORY: {history}</h1>
       <h3>DATE: {date}</h3>
-      <h3>ROUTINE: {routine}</h3>
+      <h3>ROUTINE: {routine}</h3> */}
+      {history.map((historyItem, index) => (
+        <div key={index}>
+          <h1>ROUTINE: {historyItem[2]}</h1>
+          <h3>DATE: {historyItem[1]}</h3>
+        </div>
+      ))}
     </div>
   );
 }

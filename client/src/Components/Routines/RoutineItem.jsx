@@ -59,10 +59,9 @@ export default function RoutineItem({
             <div className="popup__routine-item-exercises">
               {routine.exercises.map((exercise, index) => (
                 <div key={index}>
-                  <h2>{exercise.exercise.name}</h2>
+                  <h2>{exercise.name}</h2>
                   <h3>
-                    {exercise.exercise.sets} | {exercise.exercise.reps} |{" "}
-                    {exercise.exercise.weight}
+                    {exercise.sets} | {exercise.reps} | {exercise.weight}
                   </h3>
                   <button>Edit</button>
                 </div>

@@ -20,31 +20,49 @@ export default function Routines() {
     setRoutines([
       {
         id: 0,
-        name: "routine 1",
+        name: "Push Day",
         exercises: [
           {
-            id: 0,
-            exercise: {
-              name: "exercise 1",
-              sets: 3,
-              reps: 10,
-              weight: 100,
-            },
+            name: "Bench Press",
+            sets: 3,
+            reps: 6,
+            weight: 225,
+          },
+          {
+            name: "Pushups",
+            sets: 4,
+            reps: 25,
+            weight: 0,
+          },
+          {
+            name: "Cable Crossover",
+            sets: 3,
+            reps: 10,
+            weight: 50,
           },
         ],
       },
       {
         id: 1,
-        name: "routine 2",
+        name: "Pull Day",
         exercises: [
           {
-            id: 0,
-            exercise: {
-              name: "exercise 1",
-              sets: 3,
-              reps: 10,
-              weight: 100,
-            },
+            name: "Barbell bent-over row",
+            sets: 4,
+            reps: 10,
+            weight: 155,
+          },
+          {
+            name: "Lat pull-down",
+            sets: 4,
+            reps: 12,
+            weight: 120,
+          },
+          {
+            name: "Single-arm dumbbell row",
+            sets: 3,
+            reps: 16,
+            weight: 55,
           },
         ],
       },
@@ -77,13 +95,10 @@ export default function Routines() {
       name: "routine test",
       exercises: [
         {
-          id: 0,
-          exercise: {
-            name: "exercise 1",
-            sets: 3,
-            reps: 10,
-            weight: 100,
-          },
+          name: "exercise 1",
+          sets: 3,
+          reps: 10,
+          weight: 100,
         },
       ],
     };
@@ -100,13 +115,10 @@ export default function Routines() {
 
   const handleAddExercise = (routine, exerciseName) => {
     const exercise = {
-      id: routine.exercises.length,
-      exercise: {
-        name: exerciseName,
-        sets: 3,
-        reps: 10,
-        weight: 100,
-      },
+      name: exerciseName,
+      sets: 3,
+      reps: 10,
+      weight: 100,
     };
 
     // add exercises to routine.exercises

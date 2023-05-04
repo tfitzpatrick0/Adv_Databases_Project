@@ -31,10 +31,10 @@ export default function RegisterForm({ user, onChange, onSubmit }) {
             />
             <input
               className="userinfo-input"
-              type="email"
-              value={user.email}
-              name="email"
-              placeholder="Email"
+              type="text"
+              value={user.username}
+              name="username"
+              placeholder="Username"
               onChange={onChange}
               required
             />
