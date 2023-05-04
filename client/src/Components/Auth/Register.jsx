@@ -31,22 +31,22 @@ export default function Register() {
       let newId = 20003;
       console.log("new id: ", newId);
 
-      // axios.get(getMaxIdRoute).then((res) => {
-      //   console.log("Max ID: ", res.data);
-      //   newId = parseInt(res.data[0]) + 1;
-      //   console.log("New ID: ", newId);
-      // });
+      axios.get(getMaxIdRoute).then((res) => {
+        console.log("Max ID: ", res.data);
+        newId = parseInt(res.data[0]) + 1;
+        console.log("New ID: ", newId);
+      });
 
-      // axios
-      //   .post(checkExistingUserRoute, { username: newUser.username })
-      //   .then((res) => {
-      //     console.log("Existing User: ", res.data);
-      //     if (res.data.length > 0) {
-      //       alert("Username already exists!");
-      //       // setAdd(false);
-      //       return;
-      //     }
-      //   });
+      axios
+        .post(checkExistingUserRoute, { username: newUser.username })
+        .then((res) => {
+          console.log("Existing User: ", res.data);
+          if (res.data.length > 0) {
+            alert("Username already exists!");
+            // setAdd(false);
+            return;
+          }
+        });
 
       axios
         .post(insertNewUserRoute, {
