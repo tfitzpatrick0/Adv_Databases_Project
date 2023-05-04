@@ -137,6 +137,54 @@ export default function Routines() {
     setRoutines(newRoutines);
   };
 
+  const handleOnChange = (e, routineIndex, exerciseIndex) => {
+    e.preventDefault();
+    console.log(e.target);
+
+    const { name, value: newValue } = e.target;
+    console.log(name, newValue);
+
+    console.log("ROUTINE INDEX: ", routineIndex);
+    console.log("EXERCISE INDEX: ", exerciseIndex);
+
+    console.log(
+      "LENGTH OF EXERCISES: ",
+      routines[routineIndex].exercises.length
+    );
+    console.log(routines[routineIndex].exercises[exerciseIndex]);
+
+    const updatedExercise = {
+      ...routines[routineIndex].exercises[exerciseIndex],
+      [name]: newValue,
+    };
+    console.log("Updated Exercise: ", updatedExercise);
+
+    const updatedExercises = routines[routineIndex].exercises.map(
+      (exercise) => {
+        if (exercise.name === updatedExercise.name) {
+          return updatedExercise;
+        }
+        return exercise;
+      }
+    );
+    console.log("Updated Exercises ", updatedExercises);
+
+    const updatedRoutine = {
+      ...routines[routineIndex],
+      exercises: updatedExercises,
+    };
+    console.log("Updated Routine: ", updatedRoutine);
+
+    const updatedRoutines = routines.map((routine) => {
+      if (routine.id === routines[routineIndex].id) {
+        return updatedRoutine;
+      }
+      return routine;
+    });
+
+    setRoutines(updatedRoutines);
+  };
+
   return (
     <>
       {showWorkout ? (
@@ -160,6 +208,8 @@ export default function Routines() {
                   routine={routine}
                   handleStartWorkout={handleStartWorkout}
                   handleAddExercise={handleAddExercise}
+                  handleOnChange={handleOnChange}
+                  routineIndex={index}
                   key={index}
                 />
               ))}

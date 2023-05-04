@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 
 export default function Workout({ routine }) {
+  const navigate = useNavigate();
+
   const [exercises, setExercises] = useState([]);
 
   const [toggle, setToggle] = useState(true);
@@ -37,6 +40,12 @@ export default function Workout({ routine }) {
     setExercises(updatedExercises);
   };
 
+  const handleSaveWorkout = () => {
+    console.log("SAVING WORKOUT");
+    alert(`Workout Saved! Congrats on completing ${routine.name}!`);
+    navigate("/");
+  };
+
   return (
     // create an html layout that contains the routine title and a time at the top left,
     // and a start workout button and end workout button at the top right
@@ -46,12 +55,14 @@ export default function Workout({ routine }) {
         <>
           <div className="start-workout__wrapper">
             <div className="start-workout-routine-name">
-              <h1>{routine.name} - 00:00</h1>
+              {/* <h1>{routine.name} - 00:00</h1> */}
+              <h1>{routine.name}</h1>
             </div>
-            <h2>Select Routine</h2>
             <div className="start-workout-timer">
-              <button className="button-1">Start Workout</button>
-              <button className="button-1">End Workout</button>
+              <button className="button-1" onClick={() => handleSaveWorkout()}>
+                Save Workout
+              </button>
+              {/* <button className="button-1">End Workout</button> */}
             </div>
             <div className="start-workout-timer">
               <button className="button-1" onClick={() => setToggle(!toggle)}>
