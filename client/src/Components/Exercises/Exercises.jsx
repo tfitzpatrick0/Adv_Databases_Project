@@ -13,6 +13,7 @@ import "./styles.css";
 export default function Exercises({ onExerciseClick }) {
   const [exercises, setExercises] = useState([]);
 
+  // state for search filters
   const [keyword, setKeyword] = useState("");
   const [extype, setExtype] = useState();
   const [bodypart, setBodypart] = useState();

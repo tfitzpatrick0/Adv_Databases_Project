@@ -62,7 +62,12 @@ export default function SearchForm({
       <div className="inner-form">
         <div className="basic-search">
           <div className="input-field">
-            <input id="search" type="text" onChange={onKeywordChange} />
+            <input
+              id="search"
+              type="text"
+              placeholder="Search..."
+              onChange={onKeywordChange}
+            />
           </div>
         </div>
         <div className="advance-search">
@@ -130,7 +135,7 @@ export default function SearchForm({
                 <span>108 </span>results
               </div>
               <div className="group-btn">
-                <button type="button" className="btn-delete" id="delete">
+                <button type="reset" className="btn-delete" id="delete">
                   RESET
                 </button>
                 <button
