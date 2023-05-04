@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProfileHeader from "./ProfileHeader";
+import Achievements from "./Achievements";
 
 import { getProfileRoute } from "../../utils/api";
 
@@ -50,17 +51,8 @@ export default function Profile() {
           <div className="achievements__header">
             <h1>Achievements</h1>
           </div>
-          <div className="achievements__info">
-            {achievements.map((achievement, index) => {
-              return (
-                <div className="achievements__badges" key={index}>
-                  <img src="https://via.placeholder.com/50" alt="badge" />
-                  <h2>{achievement}</h2>
-                </div>
-              );
-            })}
-          </div>
-          {/* <div className="dashboard__header">
+          <Achievements achievements={achievements} />
+          <div className="dashboard__header">
             <h1>Dashboard</h1>
           </div>
           <div className="dashboard__info">
@@ -74,7 +66,7 @@ export default function Profile() {
                 nisl aliquam nunc, vitae aliquam nisl nunc eget nunc.
               </p>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
