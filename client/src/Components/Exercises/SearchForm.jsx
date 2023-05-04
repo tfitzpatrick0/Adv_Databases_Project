@@ -2,21 +2,67 @@ import React from "react";
 
 import "./styles.css";
 
-export default function SearchForm() {
+export default function SearchForm({
+  onKeywordChange,
+  onExtypeChange,
+  onBodypartChange,
+  onEquipmentChange,
+  onDifficultyChange,
+  onSearchHandler,
+}) {
+  const options = {
+    extype: [
+      "Plyometrics",
+      "Cardio",
+      "Olympic Weightlifting",
+      "Stretching",
+      "Powerlifting",
+      "Strongman",
+      "Strength",
+    ],
+    bodypart: [
+      "Forearms",
+      "Middle Back",
+      "Neck",
+      "Triceps",
+      "Biceps",
+      "Hamstrings",
+      "Traps",
+      "Chest",
+      "Glutes",
+      "Lower Back",
+      "Quadriceps",
+      "Shoulders",
+      "Adductors",
+      "Abductors",
+      "Abdominals",
+      "Lats",
+      "Calves",
+    ],
+    equipment: [
+      "Dumbbell",
+      "Body Only",
+      "None",
+      "E-Z Curl Bar",
+      "Barbell",
+      "Kettlebells",
+      "Bands",
+      "Other",
+      "Machine",
+      "Foam Roll",
+      "Medicine Ball",
+      "Exercise Ball",
+      "Cable",
+    ],
+    difficulty: ["Expert", "Intermediate", "Beginner"],
+  };
+
   return (
-    // <div className="search-bar__wrapper">
-    //   <input type="text" placeholder="Search..." />
-    //   <button className="button-1">Body Part</button>
-    //   <button className="button-1">Difficulty</button>
-    //   <button className="button-1">Filter 3</button>
-    //   <button className="button-1">Filter 4</button>
-    //   <button className="button-1">Filter 5</button>
-    // </div>
     <form>
       <div className="inner-form">
         <div className="basic-search">
           <div className="input-field">
-            <input id="search" type="text" placeholder="Type Keywords" />
+            <input id="search" type="text" onChange={onKeywordChange} />
           </div>
         </div>
         <div className="advance-search">
@@ -24,34 +70,26 @@ export default function SearchForm() {
           <div className="row">
             <div className="input-field">
               <div className="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">
-                    Accessories
-                  </option>
-                  <option>Subject b</option>
-                  <option>Subject c</option>
+                Exercise Type
+                <select name="choices-single-default" onChange={onExtypeChange}>
+                  <option></option>
+                  {options.extype.map((option) => (
+                    <option value={option}>{option}</option>
+                  ))}
                 </select>
               </div>
             </div>
             <div className="input-field">
               <div className="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">
-                    Color
-                  </option>
-                  <option>Subject b</option>
-                  <option>Subject c</option>
-                </select>
-              </div>
-            </div>
-            <div className="input-field">
-              <div className="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">
-                    Size
-                  </option>
-                  <option>Subject b</option>
-                  <option>Subject c</option>
+                Body Part
+                <select
+                  name="choices-single-default"
+                  onChange={onBodypartChange}
+                >
+                  <option></option>
+                  {options.bodypart.map((option) => (
+                    <option value={option}>{option}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -59,37 +97,29 @@ export default function SearchForm() {
           <div className="row second">
             <div className="input-field">
               <div className="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">
-                    Sale
-                  </option>
-                  <option>Subject b</option>
-                  <option>Subject c</option>
+                Equipment
+                <select
+                  name="choices-single-default"
+                  onChange={onEquipmentChange}
+                >
+                  <option></option>
+                  {options.equipment.map((option) => (
+                    <option value={option}>{option}</option>
+                  ))}
                 </select>
               </div>
             </div>
             <div className="input-field">
               <div className="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">
-                    Time
-                  </option>
-                  <option>Last time</option>
-                  <option>Today</option>
-                  <option>This week</option>
-                  <option>This month</option>
-                  <option>This year</option>
-                </select>
-              </div>
-            </div>
-            <div className="input-field">
-              <div className="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">
-                    Type
-                  </option>
-                  <option>Subject b</option>
-                  <option>Subject c</option>
+                Difficulty
+                <select
+                  name="choices-single-default"
+                  onChange={onDifficultyChange}
+                >
+                  <option></option>
+                  {options.difficulty.map((option) => (
+                    <option value={option}>{option}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -100,10 +130,16 @@ export default function SearchForm() {
                 <span>108 </span>results
               </div>
               <div className="group-btn">
-                <button className="btn-delete" id="delete">
+                <button type="button" className="btn-delete" id="delete">
                   RESET
                 </button>
-                <button className="btn-search">SEARCH</button>
+                <button
+                  type="button"
+                  className="btn-search"
+                  onClick={onSearchHandler}
+                >
+                  SEARCH
+                </button>
               </div>
             </div>
           </div>
