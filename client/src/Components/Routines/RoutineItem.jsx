@@ -95,7 +95,7 @@ export default function RoutineItem({
                     )}
                   </div>
                   <div className="flex-row">
-                    <h3>Sets: </h3>
+                    <h3>Weight: </h3>
                     {toggle ? (
                       <h3 onDoubleClick={() => setToggle(!toggle)}>
                         {exercise.weight}
