@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 import Navbar from "./Navbar/Navbar";
 import Home from "./Home/Home";
@@ -23,16 +24,33 @@ export default function Components() {
       <Router>
         {/* Can wrap auth routes and app routes in separate routing components
         --> the app routes will have Navbar and the auth routes won't */}
-        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/exercises" element={<Exercises />} />
-          <Route path="/routines" element={<Routines />} />
-          <Route path="/workout" element={<Workout />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/"
+            element={<ProtectedRoute path="/" element={Home} />}
+          />
+          <Route
+            path="/exercises"
+            element={<ProtectedRoute path="/" element={Exercises} />}
+          />
+          <Route
+            path="/routines"
+            element={<ProtectedRoute path="/" element={Routines} />}
+          />
+          <Route
+            path="/workout"
+            element={<ProtectedRoute path="/" element={Workout} />}
+          />
+          <Route
+            path="/history"
+            element={<ProtectedRoute path="/" element={History} />}
+          />
+          <Route
+            path="/profile"
+            element={<ProtectedRoute path="/" element={Profile} />}
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>

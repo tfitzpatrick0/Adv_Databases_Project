@@ -1,245 +1,161 @@
-/* SEARCH FORM */
+import { Router } from "express";
+import { getAllExercises } from "../controllers/exercises.controllers";
+import { getExercisesByKeyword } from "../controllers/exercises.controllers";
+import { getExFilters } from "../controllers/exercises.controllers";
+import { getBodypartFilters } from "../controllers/exercises.controllers";
+import { getEqipmentFilters } from "../controllers/exercises.controllers";
+import { getExLevelFilters } from "../controllers/exercises.controllers";
+import { getExercisesByFilters } from "../controllers/exercises.controllers";
 
-.inner-form {
-  width: 100%;
+export const exercisesRouter = Router();
+
+// HOST:PORT/api/exercises routes
+exercisesRouter.get("/getallexercises", getAllExercises);
+
+//search by keyword
+exercisesRouter.post("/getexercisesbykeyword", getExercisesByKeyword);
+
+//get search filters
+exercisesRouter.get("/getextypefilters", getExFilters);
+exercisesRouter.get("/getbodypartfilters", getBodypartFilters);
+exercisesRouter.get("/getequipmentfilters", getEqipmentFilters);
+exercisesRouter.get("/getexlevelfilters", getExLevelFilters);
+exercisesRouter.post("/getexercisesbyfilters", getExercisesByFilters);
+
+//search by filters
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+import {connect} from "../utils/db";
+
+export const getAllExercises = async (req, res) => {
+  try {
+    const conn = await connect();
+
+    const result = await conn.execute(`SELECT * FROM exercises`);
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in getAllExercises: ", err);
+  }
+};
+
+export const getExercisesByKeyword = async (req, res) => {
+  try {
+    const conn = await connect();
+
+    const {keyword} = req.body;
+    console.log("keyword: ", keyword);
+    const result = await conn.execute(`select * from exercises where title like '%${keyword}%'`);
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in getExercisesByKeyword: ", err);
+  }
+};
+
+export const getExFilters = async (req, res) => {
+  try {
+    const conn = await connect();
+
+    const result = await conn.execute(`select distinct extype from exercises`);
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in getExFilters: ", err);
+  }
+};
+
+export const getBodypartFilters = async (req, res) => {
+  try {
+    const conn = await connect();
+
+    const result = await conn.execute(`select distinct bodypart from exercises`);
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in getBodypartFilters: ", err);
+  }
+};
+
+export const getEqipmentFilters = async (req, res) => {
+  try {
+    const conn = await connect();
+
+    const result = await conn.execute(`select distinct equipment from exercises`);
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in getEquipmentFilters: ", err);
+  }
+};
+
+export const getExLevelFilters = async (req, res) => {
+  try {
+    const conn = await connect();
+
+    const result = await conn.execute(`select distinct exlevel from exercises`);
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in getExLevelFiters: ", err);
+  }
+};
+
+export const getExercisesByFilters = async (req, res) => {
+  try {
+    const conn = await connect();
+    let {keyword, extype, bodypart, equipment, difficulty} = req.body;
+    if (!keyword){
+      keyword = '%';
+    }
+    else {
+      keyword='%' + keyword + '%';
+    }
+    if (!extype){
+      extype = '%';
+    }
+    if (!bodypart){
+      bodypart = '%';
+    }
+    if (!equipment){
+      equipment = '%';
+    }
+    if (!difficulty){
+      difficulty = '%';
+    }
+
+
+    const result = await conn.execute(`select * from exercises where title like '${keyword}'
+    and extype like '${extype}' and bodypart like '${bodypart}' and equipment like '${equipment}' and exlevel like '${difficulty}'`);
+
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Error in getExercisesByFilters: ", err);
+  }
+};
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+module.exports = {
+  HOST: 'http://3.209.127.91',
+  PORT: 8016,
+  DB_USER: 'ramzi',
+  DB_PASS: 'ramzi',
+  DB_CONNECT: 'localhost:1521/xe'
 }
 
-.inner-form .input-field {
-  position: relative;
-}
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-/* search bar?? */
-.inner-form .input-field input {
-  height: 100%;
-  border: 0;
-  background: #fff;
-  display: block;
-  width: 100%;
-  padding: 10px 32px 10px 70px;
-  font-size: 18px;
-  color: #666;
-  border-radius: 3px;
-  height: 70px;
-  color: #555;
-  font-family: "Lato", sans-serif;
-}
+import oracledb from "oracledb";
+import * as config from "../config";
 
-.inner-form .input-field input.placeholder {
-  color: #999;
-  font-size: 18px;
-  font-weight: 600;
-}
+export const connect = async () => {
+  const conn = await oracledb.getConnection({
+    user: config.DB_USER,
+    password: config.DB_PASS,
+    connectString: config.DB_CONNECT
+  });
 
-.inner-form .input-field input:hover,
-.inner-form .input-field input:focus {
-  box-shadow: none;
-  outline: 0;
-}
-
-/* search button */
-.inner-form .input-field .btn-search {
-  min-width: 100px;
-  height: 40px;
-  padding: 0 15px;
-  background: #00bbec;
-  white-space: nowrap;
-  border-radius: 0;
-  font-size: 14px;
-  color: #fff;
-  transition: all 0.2s ease-out, color 0.2s ease-out;
-  border: 0;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
-}
-
-.inner-form .input-field .btn-search:hover,
-.inner-form .input-field .btn-search:focus {
-  background: #00a7d3;
-}
-
-/* reset button */
-.inner-form .input-field .btn-delete {
-  min-width: 100px;
-  height: 40px;
-  padding: 0 15px;
-  background: transparent;
-  white-space: nowrap;
-  border-radius: 0;
-  font-size: 14px;
-  color: #666;
-  transition: all 0.2s ease-out, color 0.2s ease-out;
-  border: 0;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.inner-form .input-field .btn-delete:hover,
-.inner-form .input-field .btn-delete:focus {
-  color: #000;
-  outline: 0;
-  box-shadow: none;
-}
-
-/* formatting search bar */
-.inner-form .basic-search {
-  /* box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); */
-  border-bottom: 2px solid var(--sky-blue);
-}
-
-.inner-form .basic-search .input-field {
-  width: 100%;
-}
-
-.inner-form .basic-search .input-field input {
-  padding: 10px 80px 10px 40px;
-}
-
-/* formatting advanced search */
-.inner-form .advance-search {
-  background: #fff;
-  padding: 40px;
-  /* box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); */
-}
-
-/* advanced search description */
-.inner-form .advance-search .desc {
-  font-size: 14px;
-  color: #999;
-  display: block;
-  margin-bottom: 26px;
-  font-weight: bold;
-}
-
-/* rows for advanced search */
-.inner-form .advance-search .row {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.inner-form .advance-search .row.second {
-  margin-bottom: 46px;
-}
-
-.inner-form .advance-search .row.third {
-  margin-bottom: 0;
-}
-
-/* flex the bottom row */
-.inner-form .advance-search .row.third .input-field {
-  width: 100%;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-/* style results text */
-.inner-form .advance-search .row.third .input-field .result-count {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 110px;
-  color: #666;
-  font-size: 14px;
-}
-
-/* number of results has a different color */
-.inner-form .advance-search .row.third .input-field .result-count span {
-  color: #00bbec;
-  padding-right: 5px;
-}
-
-/* line up the left edge of advanced search boxes */
-.inner-form .advance-search .input-field {
-  width: calc((100% - 40px) / 3);
-}
-
-/* height for advanced search box field */
-.inner-form .advance-search .input-select {
-  height: 40px;
-}
-
-/* idk what these do */
-.inner-form .advance-search .choices__inner {
-  background: transparent;
-  border-radius: 0;
-  border: 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  height: 100%;
-  color: #fff;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 0;
-  padding-right: 30px;
-  font-size: 14px;
-  min-height: 40px;
-}
-
-.inner-form
-  .advance-search
-  .choices__inner
-  .choices__list.choices__list--single {
-  display: -ms-flexbox;
-  display: flex;
-  padding: 5px 18px;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-}
-
-.inner-form
-  .advance-search
-  .choices__inner
-  .choices__item.choices__item--selectable.choices__placeholder {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  opacity: 1;
-  color: #666;
-  font-weight: bold;
-}
-
-.inner-form
-  .advance-search
-  .choices__inner
-  .choices__list--single
-  .choices__item {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  color: #00bbec;
-  font-weight: bold;
-}
-
-.inner-form .advance-search .choices__list.choices__list--dropdown {
-  border: 0;
-  background: #fff;
-  padding: 10px 18px 20px 18px;
-  margin-top: 0;
-  border-radius: 0;
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
-}
-
-.inner-form
-  .advance-search
-  .choices__list.choices__list--dropdown
-  .choices__item--selectable {
-  padding-right: 0;
-}
+  return conn;
+};

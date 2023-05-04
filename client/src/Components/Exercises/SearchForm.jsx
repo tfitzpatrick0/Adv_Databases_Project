@@ -9,6 +9,7 @@ export default function SearchForm({
   onEquipmentChange,
   onDifficultyChange,
   onSearchHandler,
+  onResetHandler,
 }) {
   const options = {
     extype: [
@@ -78,8 +79,10 @@ export default function SearchForm({
                 Exercise Type
                 <select name="choices-single-default" onChange={onExtypeChange}>
                   <option></option>
-                  {options.extype.map((option) => (
-                    <option value={option}>{option}</option>
+                  {options.extype.map((option, index) => (
+                    <option value={option} key={index}>
+                      {option}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -92,8 +95,10 @@ export default function SearchForm({
                   onChange={onBodypartChange}
                 >
                   <option></option>
-                  {options.bodypart.map((option) => (
-                    <option value={option}>{option}</option>
+                  {options.bodypart.map((option, index) => (
+                    <option value={option} key={index}>
+                      {option}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -108,8 +113,10 @@ export default function SearchForm({
                   onChange={onEquipmentChange}
                 >
                   <option></option>
-                  {options.equipment.map((option) => (
-                    <option value={option}>{option}</option>
+                  {options.equipment.map((option, index) => (
+                    <option value={option} key={index}>
+                      {option}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -122,8 +129,10 @@ export default function SearchForm({
                   onChange={onDifficultyChange}
                 >
                   <option></option>
-                  {options.difficulty.map((option) => (
-                    <option value={option}>{option}</option>
+                  {options.difficulty.map((option, index) => (
+                    <option value={option} key={index}>
+                      {option}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -135,7 +144,11 @@ export default function SearchForm({
                 <span>108 </span>results
               </div>
               <div className="group-btn">
-                <button type="reset" className="btn-delete" id="delete">
+                <button
+                  type="reset"
+                  className="btn-delete"
+                  onClick={onResetHandler}
+                >
                   RESET
                 </button>
                 <button

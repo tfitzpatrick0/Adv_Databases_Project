@@ -8,9 +8,12 @@ export default function RoutineItem({
   routine,
   handleStartWorkout,
   handleAddExercise,
+  handleOnChange,
+  routineIndex,
 }) {
   const [showRoutineItem, setShowRoutineItem] = useState(false);
   const [showExercises, setShowExercises] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
   // const [exercises, setExercises] = useState([
   //   "exercise 1",
@@ -57,14 +60,55 @@ export default function RoutineItem({
               </div>
             </div>
             <div className="popup__routine-item-exercises">
+              <button onClick={() => setToggle(!toggle)}>Edit</button>
               {routine.exercises.map((exercise, index) => (
                 <div key={index}>
-                  <h2>{exercise.exercise.name}</h2>
-                  <h3>
-                    {exercise.exercise.sets} | {exercise.exercise.reps} |{" "}
-                    {exercise.exercise.weight}
-                  </h3>
-                  <button>Edit</button>
+                  <h2>{exercise.name}</h2>
+                  <div className="flex-row">
+                    <h3>Sets: </h3>
+                    {toggle ? (
+                      <h3 onDoubleClick={() => setToggle(!toggle)}>
+                        {exercise.sets}
+                      </h3>
+                    ) : (
+                      <input
+                        type="text"
+                        name="sets"
+                        value={exercise.sets}
+                        onChange={(e) => handleOnChange(e, routineIndex, index)}
+                      />
+                    )}
+                  </div>
+                  <div className="flex-row">
+                    <h3>Reps: </h3>
+                    {toggle ? (
+                      <h3 onDoubleClick={() => setToggle(!toggle)}>
+                        {exercise.reps}
+                      </h3>
+                    ) : (
+                      <input
+                        type="text"
+                        name="reps"
+                        value={exercise.reps}
+                        onChange={(e) => handleOnChange(e, routineIndex, index)}
+                      />
+                    )}
+                  </div>
+                  <div className="flex-row">
+                    <h3>Sets: </h3>
+                    {toggle ? (
+                      <h3 onDoubleClick={() => setToggle(!toggle)}>
+                        {exercise.weight}
+                      </h3>
+                    ) : (
+                      <input
+                        type="text"
+                        name="weight"
+                        value={exercise.weight}
+                        onChange={(e) => handleOnChange(e, routineIndex, index)}
+                      />
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

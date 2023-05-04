@@ -26,8 +26,15 @@
 
 .start-workout-timer {
   display: flex;
+  padding-bottom: 1rem;
 }
 
 .start-workout-timer > * {
   margin: 0 1rem;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

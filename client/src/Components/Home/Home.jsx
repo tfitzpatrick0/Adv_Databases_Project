@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import logo from "../../assets/logo.png";
 
 import "./styles.css";
 
@@ -22,15 +23,17 @@ export default function Home() {
   return (
     <div className="homepage">
       <div className="quickstart__wrapper">
-        <button className="button-1">Quick Start</button>
+        {/* <button className="button-1">Quick Start</button> */}
+        <img width={500} height={500} src={logo} alt="logo" />
       </div>
-      <div className="panels__wrapper-1">
+      <div className="hero__wrapper">
         {/* map elements from routines into child div elements */}
-        {routines.map((routine, index) => (
+        {/* {routines.map((routine, index) => (
           <div className="panel-1 bg-1" key={index}>
             <h2>{routine}</h2>
           </div>
-        ))}
+        ))} */}
+        <h1 className="hero-text">Start your fitness journey TODAY</h1>
       </div>
     </div>
   );

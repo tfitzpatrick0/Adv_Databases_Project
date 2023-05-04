@@ -3,7 +3,7 @@ import axios from "axios";
 import ProfileHeader from "./ProfileHeader";
 import Achievements from "./Achievements";
 
-import { getProfileRoute } from "../../utils/api";
+import { getProfileRoute, updateProfilePicRoute } from "../../utils/api";
 
 import "./styles.css";
 
@@ -28,6 +28,23 @@ export default function Profile() {
     });
   }, []);
 
+  const onProfilePicChange = (e) => {
+    e.preventDefault();
+    console.log("Profile Pic: ", e.target.value);
+    setProfilePic(e.target.value);
+
+    // const uid = 1;
+
+    // const reqData = {
+    //   userid: uid,
+    //   newval: e.target.value,
+    // };
+
+    // axios.post(updateProfilePicRoute, reqData).then((res) => {
+    //   console.log("Profile Pic update response: ", res.data);
+    // });
+  };
+
   // create an html layout that contains a profile header at the top, with image and username
   // below that, have a div section that contains profile information like a bio, age, height, weight, etc.
   // below that have a div section with a header above that reads "Dashboard"
@@ -41,6 +58,7 @@ export default function Profile() {
             username={username}
             age={age}
             profilePic={profilePic}
+            onProfilePicChange={onProfilePicChange}
           />
           <div className="profile__info">
             <div className="profile__bio">
