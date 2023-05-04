@@ -9,27 +9,26 @@ import A5 from "../../assets/a5.png";
 import "./styles.css";
 
 export default function Achievements({ achievements }) {
-  // const displayProfilePic = (profilePic) => {
-  //   if (profilePic === 1) {
-  //     return <img src={Bear} alt="" height="150" width="150" />;
-  //   } else if (profilePic === 2) {
-  //     return <img src={Panda} alt="" height="150" width="150" />;
-  //   } else if (profilePic === 3) {
-  //     return <img src={Skelly} alt="" height="150" width="150" />;
-  //   } else {
-  //     return <img src={Avo} alt="" height="150" width="150" />;
-  //   }
-  // };
-
   const images = [A1, A2, A3, A4, A5];
+  const achievementNames = [
+    "7-Day Streak - Work out seven days in a row",
+    "Workout Explorer - Try 5 different workout routines",
+    "Consistency is Key - Log in at least 3 workouts every week for 1 month",
+    "HydroPro - Drink eight cups of water every day for 1 week",
+    "Old Reliable - Do the same workout routine 5 times",
+  ];
 
   return (
     <div className="achievements__info">
       {achievements.map((achievement, index) => {
         return (
           <div className="achievements__badges" key={index}>
-            <h2>{achievement}</h2>
-            <img src={images[index]} alt="badge" />
+            <img
+              className={achievement ? "" : "gray"}
+              src={images[index]}
+              alt="badge"
+            />
+            <h2>{achievementNames[index]}</h2>
           </div>
         );
       })}

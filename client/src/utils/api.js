@@ -6,3 +6,7 @@ export const getExercisesByFiltersRoute = `${host}/api/exercises/getexercisesbyf
 
 // profile routes
 export const getProfileRoute = `${host}/api/profile/getprofile/`;
+export const updateProfilePicRoute = `${host}/api/profile/updateicon/`;
+
+// history routes
+export const getHistoryRoute = `${host}/api/history/gethistory/`;

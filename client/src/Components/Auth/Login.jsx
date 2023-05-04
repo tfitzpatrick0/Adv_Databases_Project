@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Services/AuthService.js";
 import LoginForm from "./LoginForm";
 
+import "./styles.css";
+
 export default function Login() {
   const navigate = useNavigate();
 
@@ -44,7 +46,12 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="auth__page-layout bg-1">
+      <div className="auth-welcome-text__wrapper">
+        <h1 className="auth-welcome-text">GOD</h1>
+        <h1 className="auth-welcome-text">TIER</h1>
+        <h1 className="auth-welcome-text">GAINS</h1>
+      </div>
       <LoginForm
         user={currUser}
         onChange={onChangeHandler}

@@ -52,6 +52,13 @@ export default function Exercises({ onExerciseClick }) {
     });
   };
 
+  const onResetHandler = () => {
+    axios.get(getAllExercisesRoute).then((res) => {
+      console.log("Exercises data: ", res.data);
+      setExercises(res.data);
+    });
+  };
+
   const onKeywordChange = (e) => {
     e.preventDefault();
     console.log("Keyword: ", e.target.value);
@@ -94,6 +101,7 @@ export default function Exercises({ onExerciseClick }) {
           onEquipmentChange={onEquipmentChange}
           onDifficultyChange={onDifficultyChange}
           onSearchHandler={onSearchHandler}
+          onResetHandler={onResetHandler}
         />
       </div>
       <div className="exercises__wrapper">

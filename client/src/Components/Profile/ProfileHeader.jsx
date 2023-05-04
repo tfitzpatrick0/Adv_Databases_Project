@@ -7,13 +7,19 @@ import Avo from "../../assets/4avo.png";
 
 import "./styles.css";
 
-export default function ProfileHeader({ username, age, profilePic }) {
+export default function ProfileHeader({
+  username,
+  age,
+  profilePic,
+  onProfilePicChange,
+}) {
   const displayProfilePic = (profilePic) => {
-    if (profilePic === 1) {
+    console.log("NEW PROFILE PIC: ", profilePic);
+    if (profilePic === 1 || profilePic === "1") {
       return <img src={Bear} alt="" height="150" width="150" />;
-    } else if (profilePic === 2) {
+    } else if (profilePic === 2 || profilePic === "2") {
       return <img src={Panda} alt="" height="150" width="150" />;
-    } else if (profilePic === 3) {
+    } else if (profilePic === 3 || profilePic === "3") {
       return <img src={Skelly} alt="" height="150" width="150" />;
     } else {
       return <img src={Avo} alt="" height="150" width="150" />;
@@ -22,7 +28,20 @@ export default function ProfileHeader({ username, age, profilePic }) {
 
   return (
     <div className="profile__header">
-      {displayProfilePic(profilePic)}
+      <div className="profile__header-info">
+        {displayProfilePic(profilePic)}
+        {/* dropdown form with four options */}
+        <form>
+          <select onChange={onProfilePicChange}>
+            {/* hide first option after clicking away */}
+            <option hidden></option>
+            <option value={1}>Bear</option>
+            <option value={2}>Panda</option>
+            <option value={3}>Skelly</option>
+            <option value={4}>Avo</option>
+          </select>
+        </form>
+      </div>
       <div className="profile__header-info">
         <h1 className="profile-username">User - {username}</h1>
         <h1>Age - {age}</h1>

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { createUser } from "../../Services/AuthService.js";
 import RegisterForm from "./RegisterForm";
 
+import "./styles.css";
+
 export default function Register() {
   const navigate = useNavigate();
 
@@ -47,7 +49,12 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div className="auth__page-layout bg-1">
+      <div className="auth-welcome-text__wrapper">
+        <h1 className="auth-welcome-text">GOD</h1>
+        <h1 className="auth-welcome-text">TIER</h1>
+        <h1 className="auth-welcome-text">GAINS</h1>
+      </div>
       <RegisterForm
         user={newUser}
         onChange={onChangeHandler}
