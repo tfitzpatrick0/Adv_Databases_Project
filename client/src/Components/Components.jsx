@@ -39,10 +39,10 @@ export default function Components() {
             path="/routines"
             element={<ProtectedRoute path="/" element={Routines} />}
           />
-          <Route
+          {/* <Route
             path="/workout"
             element={<ProtectedRoute path="/" element={Workout} />}
-          />
+          /> */}
           <Route
             path="/history"
             element={<ProtectedRoute path="/" element={History} />}

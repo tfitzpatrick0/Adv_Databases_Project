@@ -10,6 +10,10 @@ export const insertNewUserRoute = `${host}/api/userpass/insertnewuser/`;
 export const getAllExercisesRoute = `${host}/api/exercises/getallexercises/`;
 export const getExercisesByFiltersRoute = `${host}/api/exercises/getexercisesbyfilters/`;
 
+// routines routes
+export const getRoutinesByIdRoute = `${host}/api/routines/getallroutines/`; // :id field attached to endpoint
+export const updateRoutineEntryRoute = `${host}/api/routines/updateroutineentry/`;
+
 // profile routes
 export const getProfileRoute = `${host}/api/profile/getprofile/`;
 export const updateProfilePicRoute = `${host}/api/profile/updateicon/`;

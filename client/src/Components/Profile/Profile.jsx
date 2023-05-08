@@ -33,16 +33,16 @@ export default function Profile() {
     console.log("Profile Pic: ", e.target.value);
     setProfilePic(e.target.value);
 
-    // const uid = 1;
+    const uid = localStorage.getItem("uid");
 
-    // const reqData = {
-    //   userid: uid,
-    //   newval: e.target.value,
-    // };
+    const reqData = {
+      userid: uid,
+      newval: e.target.value,
+    };
 
-    // axios.post(updateProfilePicRoute, reqData).then((res) => {
-    //   console.log("Profile Pic update response: ", res.data);
-    // });
+    axios.post(updateProfilePicRoute, reqData).then((res) => {
+      console.log("Profile Pic update response: ", res.data);
+    });
   };
 
   // create an html layout that contains a profile header at the top, with image and username

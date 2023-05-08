@@ -9,7 +9,7 @@ export default function RoutineItem({
   handleStartWorkout,
   handleAddExercise,
   handleOnChange,
-  routineIndex,
+  handleOnSave,
 }) {
   const [showRoutineItem, setShowRoutineItem] = useState(false);
   const [showExercises, setShowExercises] = useState(false);
@@ -50,7 +50,12 @@ export default function RoutineItem({
                 >
                   GO TO WORKOUT
                 </button>
-                <button className="button-1">Save</button>
+                <button
+                  className="button-1"
+                  onClick={() => handleOnSave(routine.id - 1)}
+                >
+                  Save
+                </button>
                 <button
                   className="button-2"
                   onClick={() => setShowRoutineItem(!showRoutineItem)}
@@ -75,7 +80,9 @@ export default function RoutineItem({
                         type="text"
                         name="sets"
                         value={exercise.sets}
-                        onChange={(e) => handleOnChange(e, routineIndex, index)}
+                        onChange={(e) =>
+                          handleOnChange(e, routine.id - 1, index)
+                        }
                       />
                     )}
                   </div>
@@ -90,7 +97,9 @@ export default function RoutineItem({
                         type="text"
                         name="reps"
                         value={exercise.reps}
-                        onChange={(e) => handleOnChange(e, routineIndex, index)}
+                        onChange={(e) =>
+                          handleOnChange(e, routine.id - 1, index)
+                        }
                       />
                     )}
                   </div>
@@ -105,7 +114,9 @@ export default function RoutineItem({
                         type="text"
                         name="weight"
                         value={exercise.weight}
-                        onChange={(e) => handleOnChange(e, routineIndex, index)}
+                        onChange={(e) =>
+                          handleOnChange(e, routine.id - 1, index)
+                        }
                       />
                     )}
                   </div>

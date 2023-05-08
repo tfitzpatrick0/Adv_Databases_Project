@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import RoutineItem from "./RoutineItem";
-
 import Workout from "../Workout/Workout";
+
+import { getRoutinesByIdRoute, updateRoutineEntryRoute } from "../../utils/api";
 
 import "./styles.css";
 
@@ -17,56 +19,50 @@ export default function Routines() {
 
   useEffect(() => {
     // set routines as a dictionary object. each routine will have a name and a list of exercises
-    setRoutines([
-      {
-        id: 0,
-        name: "Push Day",
-        exercises: [
-          {
-            name: "Bench Press",
-            sets: 3,
-            reps: 6,
-            weight: 225,
-          },
-          {
-            name: "Pushups",
-            sets: 4,
-            reps: 25,
-            weight: 0,
-          },
-          {
-            name: "Cable Crossover",
-            sets: 3,
-            reps: 10,
-            weight: 50,
-          },
-        ],
-      },
-      {
-        id: 1,
-        name: "Pull Day",
-        exercises: [
-          {
-            name: "Barbell bent-over row",
-            sets: 4,
-            reps: 10,
-            weight: 155,
-          },
-          {
-            name: "Lat pull-down",
-            sets: 4,
-            reps: 12,
-            weight: 120,
-          },
-          {
-            name: "Single-arm dumbbell row",
-            sets: 3,
-            reps: 16,
-            weight: 55,
-          },
-        ],
-      },
-    ]);
+
+    // get routines from database
+    axios
+      .get(getRoutinesByIdRoute + localStorage.getItem("uid"))
+      .then((res) => {
+        console.log("Routine Entries: ", res.data);
+
+        let currRoutines = [];
+        res.data.forEach((routineEntry) => {
+          // check if currRoutines has a dictionary object with the same id as the current routine
+          let currRoutine = currRoutines.find(
+            (routine) => routine.id === routineEntry[8]
+          );
+
+          if (currRoutine) {
+            // if currRoutine exists, add the exercise to the currRoutine's exercises list
+            currRoutine.exercises.push({
+              name: routineEntry[1],
+              entryId: routineEntry[6],
+              sets: routineEntry[11],
+              reps: routineEntry[9],
+              weight: routineEntry[10],
+            });
+          } else {
+            // if currRoutine does not exist, create a new routine object and add it to currRoutines
+            currRoutines.push({
+              id: routineEntry[8],
+              name: routineEntry[17],
+              exercises: [
+                {
+                  name: routineEntry[1],
+                  entryId: routineEntry[6],
+                  sets: routineEntry[11],
+                  reps: routineEntry[9],
+                  weight: routineEntry[10],
+                },
+              ],
+            });
+          }
+        });
+
+        console.log("currRoutines: ", currRoutines);
+        setRoutines(currRoutines);
+      });
 
     setRecRoutines([
       {
@@ -91,7 +87,7 @@ export default function Routines() {
   // create a function handleAddRoutine() that adds a routine to the list of routines
   const handleAddRoutine = () => {
     const newRoutine = {
-      id: routines.length,
+      id: routines.length + 1,
       name: "routine test",
       exercises: [
         {
@@ -185,6 +181,45 @@ export default function Routines() {
     setRoutines(updatedRoutines);
   };
 
+  const handleOnSave = (routineIndex) => {
+    console.log("Saving Routine Number: ", routineIndex);
+
+    const currRoutine = routines[routineIndex];
+    console.log(currRoutine);
+
+    currRoutine.exercises.forEach((exercise) => {
+      axios
+        .post(updateRoutineEntryRoute, {
+          entryid: exercise.entryId,
+          key: "sets_comp",
+          value: exercise.sets,
+        })
+        .then((res) => {
+          console.log("test1", res);
+        });
+
+      axios
+        .post(updateRoutineEntryRoute, {
+          entryid: exercise.entryId,
+          key: "reps",
+          value: exercise.reps,
+        })
+        .then((res) => {
+          console.log("test2", res);
+        });
+
+      axios
+        .post(updateRoutineEntryRoute, {
+          entryid: exercise.entryId,
+          key: "tot_weight",
+          value: exercise.weight,
+        })
+        .then((res) => {
+          console.log("test3", res);
+        });
+    });
+  };
+
   return (
     <>
       {showWorkout ? (
@@ -209,7 +244,7 @@ export default function Routines() {
                   handleStartWorkout={handleStartWorkout}
                   handleAddExercise={handleAddExercise}
                   handleOnChange={handleOnChange}
-                  routineIndex={index}
+                  handleOnSave={handleOnSave}
                   key={index}
                 />
               ))}
