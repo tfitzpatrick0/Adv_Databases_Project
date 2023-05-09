@@ -21,10 +21,10 @@ export default function RoutineItem({
   //   "exercise 3",
   // ]);
 
-  const selectExercise = (exerciseName) => {
+  const selectExercise = (exerciseId, exerciseName) => {
     console.log("SELECTED EXERCISE: ", exerciseName);
     setShowExercises(!showExercises);
-    handleAddExercise(routine, exerciseName);
+    handleAddExercise(routine, exerciseId, exerciseName);
   };
 
   return (

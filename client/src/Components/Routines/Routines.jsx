@@ -173,9 +173,23 @@ export default function Routines() {
   };
 
   // ADD EXERCISE TO ROUTINE
-  const handleAddExercise = (routine, exerciseName) => {
+  const handleAddExercise = async (routine, exerciseId, exerciseName) => {
+    let newRoutineEntryId;
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "routine_entry_id",
+        table: "routine_entry",
+      })
+      .then((res) => {
+        console.log("Max Routine Entry ID: ", res.data);
+        newRoutineEntryId = parseInt(res.data[0]) + 1;
+        console.log("New Routine Entry ID: ", newRoutineEntryId);
+      });
+
     const exercise = {
       name: exerciseName,
+      entryId: newRoutineEntryId,
       sets: 3,
       reps: 10,
       weight: 100,
@@ -195,6 +209,21 @@ export default function Routines() {
     newRoutines[currRoutineId] = updatedRoutine;
 
     setRoutines(newRoutines);
+
+    // add routine entry to database
+    // let {routineeid, exid, routinefk, rreps, tweight, setsc, dur, intense, note} = req.body;
+    axios
+      .post(addRoutineEntryRoute, {
+        routineeid: newRoutineEntryId,
+        exid: exerciseId,
+        routinefk: routine.id,
+        rreps: 10,
+        tweight: 100,
+        setsc: 3,
+      })
+      .then((res) => {
+        console.log("Added Routine Entry: ", res.data);
+      });
   };
 
   const handleOnChange = (e, routineIndex, exerciseIndex) => {
@@ -221,7 +250,7 @@ export default function Routines() {
 
     const updatedExercises = routines[routineIndex].exercises.map(
       (exercise) => {
-        if (exercise.name === updatedExercise.name) {
+        if (exercise.entryId === updatedExercise.entryId) {
           return updatedExercise;
         }
         return exercise;
@@ -236,7 +265,7 @@ export default function Routines() {
     console.log("Updated Routine: ", updatedRoutine);
 
     const updatedRoutines = routines.map((routine) => {
-      if (routine.id === routines[routineIndex].id) {
+      if (routine.id === updatedRoutine.id) {
         return updatedRoutine;
       }
       return routine;

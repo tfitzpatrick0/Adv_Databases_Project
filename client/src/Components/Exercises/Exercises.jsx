@@ -115,7 +115,9 @@ export default function Exercises({ onExerciseClick }) {
           <div
             className="exercise bg-2"
             onClick={
-              onExerciseClick ? () => onExerciseClick(exercise[1]) : null
+              onExerciseClick
+                ? () => onExerciseClick(exercise[0], exercise[1])
+                : null
             }
             key={index}
           >
