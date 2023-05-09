@@ -1,0 +1,53 @@
+
+SQL*Loader: Release 11.2.0.2.0 - Production on Sat Apr 29 06:18:49 2023
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   ctl_files/userplans.ctl
+Data File:      csv_files/userplans.csv
+  Bad File:     ctl_files/userplans.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     64 rows, maximum of 256000 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table USERPLANS, loaded from every logical record.
+Insert option in effect for this table: INSERT
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+USER_PLANS_ID                       FIRST     *   ,  O(") CHARACTER            
+USER_ID_FK                           NEXT     *   ,  O(") CHARACTER            
+PLAN1                                NEXT     *   ,  O(") CHARACTER            
+PLAN2                                NEXT     *   ,  O(") CHARACTER            
+PLAN3                                NEXT     *   ,  O(") CHARACTER            
+PLAN4                                NEXT     *   ,  O(") CHARACTER            
+NEXT_PLAN                            NEXT     *   ,  O(") CHARACTER            
+
+
+Table USERPLANS:
+  1 Row successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                 115584 bytes(64 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:             1
+Total logical records rejected:         0
+Total logical records discarded:        0
+
+Run began on Sat Apr 29 06:18:49 2023
+Run ended on Sat Apr 29 06:18:49 2023
+
+Elapsed time was:     00:00:00.03
+CPU time was:         00:00:00.00

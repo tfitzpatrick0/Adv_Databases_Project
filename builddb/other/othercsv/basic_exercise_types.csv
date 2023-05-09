@@ -1,0 +1,91 @@
+id,name,exercise_type_id
+1,"Stair Climbing",1
+2,"Elliptical Trainer",1
+3,"Rowing Machine",1
+4,"Stairmaster",1
+5,"Stationary Bicycle",1
+6,"Treadmill",1
+7,"Cycling",1
+8,"Inline Skating",1
+9,"Jogging",1
+10,"Nordic Walking",1
+11,"Squat",2
+12,"Leg Press",2
+13,"Lunge",2
+14,"Calf Raise",2
+15,"Leg Extension",2
+16,"Deadlift",2
+17,"Leg Curl",2
+18,"Bench Press",2
+19,"Fly",2
+20,"Push Up",2
+21,"Bent-over Row",2
+22,"Chin-up",2
+23,"Pulldown",2
+24,"Pullup",2
+25,"Shoulder Shrug",2
+26,"Front Raise",2
+27,"Handstand Pushup",2
+28,"Lateral Raise",2
+29,"Military Press",2
+30,"Shoulder Press",2
+31,"Upright Row",2
+32,"Rear Delt Raise",2
+33,"Biceps Curl",2
+34,"Dip",2
+35,"Pushdown",2
+36,"Triceps Extension",2
+37,"Crunch",2
+38,"Sit-up",2
+39,"Leg Raise",2
+40,"Back Extension",2
+41,"Hyperextension",2
+42,"Basketball",3
+43,"Baseball",3
+44,"Football",3
+45,"Hockey",3
+46,"Golf",3
+47,"Water Polo",3
+48,"Swimming",1
+49,"Skiing",3
+50,"Skateboarding",3
+51,"Hang Gliding",3
+52,"Snowboarding",3
+53,"Fishing",3
+54,"Hunting",3
+55,"Paintball",3
+56,"Kayaking",3
+57,"Hiking",3
+58,"Tennis",3
+59,"Canoeing",3
+60,"Kitesurfing",3
+61,"Gymnastics",3
+62,"Bowling",3
+63,"Boxing",3
+64,"Auto racing",3
+65,"Skating",3
+66,"Squash",3
+67,"Rodeo",3
+68,"Volleyball",3
+69,"Soccer",3
+70,"Darts",3
+71,"Table Tennis",3
+72,"Cricket",3
+73,"Skydiving",3
+74,"Aquafit",4
+75,"Belly Dancing",4
+76,"Bootcamp Conditioning",4
+77,"Cardio Jam",4
+78,"Cycle Zone",4
+79,"Hip Hop",4
+80,"Kickbox Cardio",4
+81,"Club Boxing",4
+82,"Mat Pilates",4
+83,"Senior Fit",4
+84,"Step plus Abs",4
+85,"Step II plus Abs",4
+86,"Step Circuit",4
+87,"Step Sculpt",4
+88,"Striding",4
+89,"Yoga",4
+90,"Yoga Basics",4

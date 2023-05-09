@@ -1,0 +1,13 @@
+Steps to export/import data from Oracle db to dump file:
+On first time only:
+1.) Ensure the scripts contain the proper Oracle login information for your desired user
+2.) Create directory /usr/lib/oracle/xe/tmp
+3.) As ec2-user, run the grant shell script which will log into SQL as the SYSTEM user, create SQL directory and grant permissions to regular user
+
+For every export:
+1.) Run the save_prev_exp shell script as root user 
+	(you can use the command sudo su)
+2.) As ec2-user, in system command line, run export shell script, which will run expdp with associated parameters to store entire database as dump file
+
+To import:
+1.) Run the import shell script as ec2 user 
