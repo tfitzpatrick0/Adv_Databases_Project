@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import RoutineItem from "./RoutineItem";
-
+import AddRoutine from "./AddRoutine";
 import Workout from "../Workout/Workout";
+
+import {
+  getRoutinesByIdRoute,
+  updateRoutineEntryRoute,
+  getAnyMaxIdRoute,
+  addRoutineRoute,
+  addRoutineEntryRoute,
+} from "../../utils/api";
 
 import "./styles.css";
 
@@ -17,56 +26,51 @@ export default function Routines() {
 
   useEffect(() => {
     // set routines as a dictionary object. each routine will have a name and a list of exercises
-    setRoutines([
-      {
-        id: 0,
-        name: "Push Day",
-        exercises: [
-          {
-            name: "Bench Press",
-            sets: 3,
-            reps: 6,
-            weight: 225,
-          },
-          {
-            name: "Pushups",
-            sets: 4,
-            reps: 25,
-            weight: 0,
-          },
-          {
-            name: "Cable Crossover",
-            sets: 3,
-            reps: 10,
-            weight: 50,
-          },
-        ],
-      },
-      {
-        id: 1,
-        name: "Pull Day",
-        exercises: [
-          {
-            name: "Barbell bent-over row",
-            sets: 4,
-            reps: 10,
-            weight: 155,
-          },
-          {
-            name: "Lat pull-down",
-            sets: 4,
-            reps: 12,
-            weight: 120,
-          },
-          {
-            name: "Single-arm dumbbell row",
-            sets: 3,
-            reps: 16,
-            weight: 55,
-          },
-        ],
-      },
-    ]);
+
+    // get routines from database
+    axios
+      .get(getRoutinesByIdRoute + localStorage.getItem("uid"))
+      .then((res) => {
+        console.log("Routine Entries: ", res.data);
+
+        let currRoutines = [];
+        res.data.forEach((routineEntry) => {
+          // check if currRoutines has a dictionary object with the same id as the current routine
+          let currRoutine = currRoutines.find(
+            (routine) => routine.id === routineEntry[8]
+          );
+
+          if (currRoutine) {
+            // if currRoutine exists, add the exercise to the currRoutine's exercises list
+            currRoutine.exercises.push({
+              name: routineEntry[1],
+              entryId: routineEntry[6],
+              sets: routineEntry[11],
+              reps: routineEntry[9],
+              weight: routineEntry[10],
+            });
+          } else {
+            // if currRoutine does not exist, create a new routine object and add it to currRoutines
+            currRoutines.push({
+              id: routineEntry[8],
+              name: routineEntry[17],
+              desc: routineEntry[18],
+              exercises: [
+                {
+                  name: routineEntry[1],
+                  entryId: routineEntry[6],
+                  sets: routineEntry[11],
+                  reps: routineEntry[9],
+                  weight: routineEntry[10],
+                },
+              ],
+            });
+          }
+        });
+
+        console.log("currRoutines: ", currRoutines);
+        setRoutines(currRoutines);
+      });
 
     setRecRoutines([
       {
@@ -89,13 +93,40 @@ export default function Routines() {
   }, []);
 
   // create a function handleAddRoutine() that adds a routine to the list of routines
-  const handleAddRoutine = () => {
+  const handleAddRoutine = async (newRoutineName, newRoutineDesc) => {
+    let newRoutineId;
+    let newRoutineEntryId;
+    // wait for the max id to be retrieved from the database before adding the new routine
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "routine_id",
+        table: "routines",
+      })
+      .then((res) => {
+        console.log("Max Routine ID: ", res.data);
+        newRoutineId = parseInt(res.data[0]) + 1;
+        console.log("New Routine ID: ", newRoutineId);
+      });
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "routine_entry_id",
+        table: "routine_entry",
+      })
+      .then((res) => {
+        console.log("Max Routine Entry ID: ", res.data);
+        newRoutineEntryId = parseInt(res.data[0]) + 1;
+        console.log("New Routine Entry ID: ", newRoutineEntryId);
+      });
+
     const newRoutine = {
-      id: routines.length,
-      name: "routine test",
+      id: newRoutineId,
+      name: newRoutineName,
+      desc: newRoutineDesc,
       exercises: [
         {
           name: "exercise 1",
+          entryId: newRoutineEntryId,
           sets: 3,
           reps: 10,
           weight: 100,
@@ -103,6 +134,34 @@ export default function Routines() {
       ],
     };
     setRoutines([...routines, newRoutine]);
+
+    // add routine to database
+    // let {routineid, uuserid, title, descr} = req.body;
+    axios
+      .post(addRoutineRoute, {
+        routineid: newRoutineId,
+        uuserid: localStorage.getItem("uid"),
+        title: newRoutineName,
+        descr: newRoutineDesc,
+      })
+      .then((res) => {
+        console.log("Added Routine: ", res.data);
+      });
+
+    // add routine entry to database
+    // let {routineeid, exid, routinefk, rreps, tweight, setsc, dur, intense, note} = req.body;
+    axios
+      .post(addRoutineEntryRoute, {
+        routineeid: newRoutineEntryId,
+        exid: 1,
+        routinefk: newRoutineId,
+        rreps: 10,
+        tweight: 100,
+        setsc: 3,
+      })
+      .then((res) => {
+        console.log("Added Routine Entry: ", res.data);
+      });
   };
 
   // Want to eventually navigate to the workout page with the selected routine
@@ -113,9 +172,24 @@ export default function Routines() {
     // navigate("/workout");
   };
 
-  const handleAddExercise = (routine, exerciseName) => {
+  // ADD EXERCISE TO ROUTINE
+  const handleAddExercise = async (routine, exerciseId, exerciseName) => {
+    let newRoutineEntryId;
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "routine_entry_id",
+        table: "routine_entry",
+      })
+      .then((res) => {
+        console.log("Max Routine Entry ID: ", res.data);
+        newRoutineEntryId = parseInt(res.data[0]) + 1;
+        console.log("New Routine Entry ID: ", newRoutineEntryId);
+      });
+
     const exercise = {
       name: exerciseName,
+      entryId: newRoutineEntryId,
       sets: 3,
       reps: 10,
       weight: 100,
@@ -135,6 +209,21 @@ export default function Routines() {
     newRoutines[currRoutineId] = updatedRoutine;
 
     setRoutines(newRoutines);
+
+    // add routine entry to database
+    // let {routineeid, exid, routinefk, rreps, tweight, setsc, dur, intense, note} = req.body;
+    axios
+      .post(addRoutineEntryRoute, {
+        routineeid: newRoutineEntryId,
+        exid: exerciseId,
+        routinefk: routine.id,
+        rreps: 10,
+        tweight: 100,
+        setsc: 3,
+      })
+      .then((res) => {
+        console.log("Added Routine Entry: ", res.data);
+      });
   };
 
   const handleOnChange = (e, routineIndex, exerciseIndex) => {
@@ -161,7 +250,7 @@ export default function Routines() {
 
     const updatedExercises = routines[routineIndex].exercises.map(
       (exercise) => {
-        if (exercise.name === updatedExercise.name) {
+        if (exercise.entryId === updatedExercise.entryId) {
           return updatedExercise;
         }
         return exercise;
@@ -176,13 +265,52 @@ export default function Routines() {
     console.log("Updated Routine: ", updatedRoutine);
 
     const updatedRoutines = routines.map((routine) => {
-      if (routine.id === routines[routineIndex].id) {
+      if (routine.id === updatedRoutine.id) {
         return updatedRoutine;
       }
       return routine;
     });
 
     setRoutines(updatedRoutines);
+  };
+
+  const handleOnSave = (routineIndex) => {
+    console.log("Saving Routine Number: ", routineIndex);
+
+    const currRoutine = routines[routineIndex];
+    console.log(currRoutine);
+
+    currRoutine.exercises.forEach((exercise) => {
+      axios
+        .post(updateRoutineEntryRoute, {
+          entryid: exercise.entryId,
+          key: "sets_comp",
+          value: exercise.sets,
+        })
+        .then((res) => {
+          console.log("test1", res);
+        });
+
+      axios
+        .post(updateRoutineEntryRoute, {
+          entryid: exercise.entryId,
+          key: "reps",
+          value: exercise.reps,
+        })
+        .then((res) => {
+          console.log("test2", res);
+        });
+
+      axios
+        .post(updateRoutineEntryRoute, {
+          entryid: exercise.entryId,
+          key: "tot_weight",
+          value: exercise.weight,
+        })
+        .then((res) => {
+          console.log("test3", res);
+        });
+    });
   };
 
   return (
@@ -194,9 +322,7 @@ export default function Routines() {
           <div className="user-routines__wrapper">
             <div className="user-routines-title">
               <h1>MY ROUTINES</h1>
-              <button className="button-1" onClick={() => handleAddRoutine()}>
-                Add Routine
-              </button>
+              <AddRoutine handleAddRoutine={handleAddRoutine} />
             </div>
             <div className="user-routines__body">
               {/* Want to add an on click routine dropdown with more info */}
@@ -209,19 +335,19 @@ export default function Routines() {
                   handleStartWorkout={handleStartWorkout}
                   handleAddExercise={handleAddExercise}
                   handleOnChange={handleOnChange}
-                  routineIndex={index}
+                  handleOnSave={handleOnSave}
                   key={index}
                 />
               ))}
             </div>
           </div>
-          <div className="rec-routines__wrapper">
+          {/* <div className="rec-routines__wrapper">
             {recRoutines.map((routine, index) => (
               <div className="rec-routine bg-2" key={index}>
                 <h2>{routine.name}</h2>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       )}
       {/* {showWorkout && <Workout routine={selectedRoutine} />} */}

@@ -5,7 +5,6 @@ import SearchForm from "./SearchForm";
 import {
   getAllExercisesRoute,
   getExercisesByFiltersRoute,
-  getExercisesByKeywordRoute,
 } from "../../utils/api";
 
 import "./styles.css";
@@ -53,6 +52,7 @@ export default function Exercises({ onExerciseClick }) {
   };
 
   const onResetHandler = () => {
+    setKeyword("");
     axios.get(getAllExercisesRoute).then((res) => {
       console.log("Exercises data: ", res.data);
       setExercises(res.data);
@@ -102,6 +102,7 @@ export default function Exercises({ onExerciseClick }) {
           onDifficultyChange={onDifficultyChange}
           onSearchHandler={onSearchHandler}
           onResetHandler={onResetHandler}
+          numResults={exercises.length}
         />
       </div>
       <div className="exercises__wrapper">
@@ -114,7 +115,9 @@ export default function Exercises({ onExerciseClick }) {
           <div
             className="exercise bg-2"
             onClick={
-              onExerciseClick ? () => onExerciseClick(exercise[1]) : null
+              onExerciseClick
+                ? () => onExerciseClick(exercise[0], exercise[1])
+                : null
             }
             key={index}
           >

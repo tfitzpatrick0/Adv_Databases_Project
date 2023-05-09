@@ -10,6 +10,7 @@ export default function SearchForm({
   onDifficultyChange,
   onSearchHandler,
   onResetHandler,
+  numResults,
 }) {
   const options = {
     extype: [
@@ -141,7 +142,7 @@ export default function SearchForm({
           <div className="row third">
             <div className="input-field">
               <div className="result-count">
-                <span>108 </span>results
+                <span>{numResults} </span>results
               </div>
               <div className="group-btn">
                 <button

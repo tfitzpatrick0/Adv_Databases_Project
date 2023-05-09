@@ -18,10 +18,10 @@ export default function Navbar() {
       name: "Routines",
       path: "/routines",
     },
-    {
-      name: "Workout",
-      path: "/workout",
-    },
+    // {
+    //   name: "Workout",
+    //   path: "/workout",
+    // },
     {
       name: "History",
       path: "/history",
