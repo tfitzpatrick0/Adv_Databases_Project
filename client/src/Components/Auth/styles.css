@@ -114,3 +114,7 @@ button {
   background-color: var(--blue);
   border: var(--blue) solid 2px;
 }
+
+.date-container {
+  display: flex;
+}

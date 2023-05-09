@@ -341,13 +341,13 @@ export default function Routines() {
               ))}
             </div>
           </div>
-          <div className="rec-routines__wrapper">
+          {/* <div className="rec-routines__wrapper">
             {recRoutines.map((routine, index) => (
               <div className="rec-routine bg-2" key={index}>
                 <h2>{routine.name}</h2>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       )}
       {/* {showWorkout && <Workout routine={selectedRoutine} />} */}

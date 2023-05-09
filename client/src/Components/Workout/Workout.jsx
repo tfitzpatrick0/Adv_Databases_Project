@@ -31,7 +31,7 @@ export default function Workout({ routine }) {
 
     const updatedExercise = { ...exercises[index], [name]: newValue };
     const updatedExercises = exercises.map((exercise) => {
-      if (exercise.name === updatedExercise.name) {
+      if (exercise.entryId === updatedExercise.entryId) {
         return updatedExercise;
       }
       return exercise;
