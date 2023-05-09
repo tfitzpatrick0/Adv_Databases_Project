@@ -2,9 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import RoutineItem from "./RoutineItem";
+import AddRoutine from "./AddRoutine";
 import Workout from "../Workout/Workout";
 
-import { getRoutinesByIdRoute, updateRoutineEntryRoute } from "../../utils/api";
+import {
+  getRoutinesByIdRoute,
+  updateRoutineEntryRoute,
+  getAnyMaxIdRoute,
+  addRoutineRoute,
+  addRoutineEntryRoute,
+} from "../../utils/api";
 
 import "./styles.css";
 
@@ -47,6 +54,7 @@ export default function Routines() {
             currRoutines.push({
               id: routineEntry[8],
               name: routineEntry[17],
+              desc: routineEntry[18],
               exercises: [
                 {
                   name: routineEntry[1],
@@ -85,13 +93,40 @@ export default function Routines() {
   }, []);
 
   // create a function handleAddRoutine() that adds a routine to the list of routines
-  const handleAddRoutine = () => {
+  const handleAddRoutine = async (newRoutineName, newRoutineDesc) => {
+    let newRoutineId;
+    let newRoutineEntryId;
+    // wait for the max id to be retrieved from the database before adding the new routine
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "routine_id",
+        table: "routines",
+      })
+      .then((res) => {
+        console.log("Max Routine ID: ", res.data);
+        newRoutineId = parseInt(res.data[0]) + 1;
+        console.log("New Routine ID: ", newRoutineId);
+      });
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "routine_entry_id",
+        table: "routine_entry",
+      })
+      .then((res) => {
+        console.log("Max Routine Entry ID: ", res.data);
+        newRoutineEntryId = parseInt(res.data[0]) + 1;
+        console.log("New Routine Entry ID: ", newRoutineEntryId);
+      });
+
     const newRoutine = {
-      id: routines.length + 1,
-      name: "routine test",
+      id: newRoutineId,
+      name: newRoutineName,
+      desc: newRoutineDesc,
       exercises: [
         {
           name: "exercise 1",
+          entryId: newRoutineEntryId,
           sets: 3,
           reps: 10,
           weight: 100,
@@ -99,6 +134,34 @@ export default function Routines() {
       ],
     };
     setRoutines([...routines, newRoutine]);
+
+    // add routine to database
+    // let {routineid, uuserid, title, descr} = req.body;
+    axios
+      .post(addRoutineRoute, {
+        routineid: newRoutineId,
+        uuserid: localStorage.getItem("uid"),
+        title: newRoutineName,
+        descr: newRoutineDesc,
+      })
+      .then((res) => {
+        console.log("Added Routine: ", res.data);
+      });
+
+    // add routine entry to database
+    // let {routineeid, exid, routinefk, rreps, tweight, setsc, dur, intense, note} = req.body;
+    axios
+      .post(addRoutineEntryRoute, {
+        routineeid: newRoutineEntryId,
+        exid: 1,
+        routinefk: newRoutineId,
+        rreps: 10,
+        tweight: 100,
+        setsc: 3,
+      })
+      .then((res) => {
+        console.log("Added Routine Entry: ", res.data);
+      });
   };
 
   // Want to eventually navigate to the workout page with the selected routine
@@ -109,6 +172,7 @@ export default function Routines() {
     // navigate("/workout");
   };
 
+  // ADD EXERCISE TO ROUTINE
   const handleAddExercise = (routine, exerciseName) => {
     const exercise = {
       name: exerciseName,
@@ -229,9 +293,7 @@ export default function Routines() {
           <div className="user-routines__wrapper">
             <div className="user-routines-title">
               <h1>MY ROUTINES</h1>
-              <button className="button-1" onClick={() => handleAddRoutine()}>
-                Add Routine
-              </button>
+              <AddRoutine handleAddRoutine={handleAddRoutine} />
             </div>
             <div className="user-routines__body">
               {/* Want to add an on click routine dropdown with more info */}

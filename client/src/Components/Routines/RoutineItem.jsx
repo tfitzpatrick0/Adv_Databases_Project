@@ -38,9 +38,6 @@ export default function RoutineItem({
       {showRoutineItem && (
         <div className="popup__routine-item__wrapper">
           <div className="popup__routine-item__body">
-            {/* <span className="close-icon" onClick={() => setShowRoutineItem(!showRoutineItem)}>
-              x
-            </span> */}
             <div className="popup__routine-item-header">
               <h1>{routine.name}</h1>
               <div>
@@ -66,62 +63,63 @@ export default function RoutineItem({
             </div>
             <div className="popup__routine-item-exercises">
               <button onClick={() => setToggle(!toggle)}>Edit</button>
-              {routine.exercises.map((exercise, index) => (
-                <div key={index}>
-                  <h2>{exercise.name}</h2>
-                  <div className="flex-row">
-                    <h3>Sets: </h3>
-                    {toggle ? (
-                      <h3 onDoubleClick={() => setToggle(!toggle)}>
-                        {exercise.sets}
-                      </h3>
-                    ) : (
-                      <input
-                        type="text"
-                        name="sets"
-                        value={exercise.sets}
-                        onChange={(e) =>
-                          handleOnChange(e, routine.id - 1, index)
-                        }
-                      />
-                    )}
+              {routine.exercises &&
+                routine.exercises.map((exercise, index) => (
+                  <div key={index}>
+                    <h2>{exercise.name}</h2>
+                    <div className="flex-row">
+                      <h3>Sets: </h3>
+                      {toggle ? (
+                        <h3 onDoubleClick={() => setToggle(!toggle)}>
+                          {exercise.sets}
+                        </h3>
+                      ) : (
+                        <input
+                          type="text"
+                          name="sets"
+                          value={exercise.sets}
+                          onChange={(e) =>
+                            handleOnChange(e, routine.id - 1, index)
+                          }
+                        />
+                      )}
+                    </div>
+                    <div className="flex-row">
+                      <h3>Reps: </h3>
+                      {toggle ? (
+                        <h3 onDoubleClick={() => setToggle(!toggle)}>
+                          {exercise.reps}
+                        </h3>
+                      ) : (
+                        <input
+                          type="text"
+                          name="reps"
+                          value={exercise.reps}
+                          onChange={(e) =>
+                            handleOnChange(e, routine.id - 1, index)
+                          }
+                        />
+                      )}
+                    </div>
+                    <div className="flex-row">
+                      <h3>Weight: </h3>
+                      {toggle ? (
+                        <h3 onDoubleClick={() => setToggle(!toggle)}>
+                          {exercise.weight}
+                        </h3>
+                      ) : (
+                        <input
+                          type="text"
+                          name="weight"
+                          value={exercise.weight}
+                          onChange={(e) =>
+                            handleOnChange(e, routine.id - 1, index)
+                          }
+                        />
+                      )}
+                    </div>
                   </div>
-                  <div className="flex-row">
-                    <h3>Reps: </h3>
-                    {toggle ? (
-                      <h3 onDoubleClick={() => setToggle(!toggle)}>
-                        {exercise.reps}
-                      </h3>
-                    ) : (
-                      <input
-                        type="text"
-                        name="reps"
-                        value={exercise.reps}
-                        onChange={(e) =>
-                          handleOnChange(e, routine.id - 1, index)
-                        }
-                      />
-                    )}
-                  </div>
-                  <div className="flex-row">
-                    <h3>Weight: </h3>
-                    {toggle ? (
-                      <h3 onDoubleClick={() => setToggle(!toggle)}>
-                        {exercise.weight}
-                      </h3>
-                    ) : (
-                      <input
-                        type="text"
-                        name="weight"
-                        value={exercise.weight}
-                        onChange={(e) =>
-                          handleOnChange(e, routine.id - 1, index)
-                        }
-                      />
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
             <button
               className="button-1"
