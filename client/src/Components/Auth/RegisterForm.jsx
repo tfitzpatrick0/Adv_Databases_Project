@@ -130,7 +130,7 @@ export default function RegisterForm({ user, onChange, onSubmit }) {
               <button
                 className="submit-button"
                 type="button"
-                onClick={() => onSubmit()}
+                onClick={onSubmit}
               >
                 Register
               </button>
