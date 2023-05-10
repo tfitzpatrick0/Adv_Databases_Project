@@ -7,6 +7,7 @@ import {
   getProfileRoute,
   updateProfilePicRoute,
   updateAchievementRoute,
+  updateBioRoute,
 } from "../../utils/api";
 import { getAge } from "../../utils/date";
 
@@ -18,6 +19,8 @@ export default function Profile() {
   const [age, setAge] = useState();
   const [profilePic, setProfilePic] = useState();
   const [achievements, setAchievements] = useState([]);
+
+  const [updateBio, setUpdateBio] = useState(false);
 
   useEffect(() => {
     // demo with UID = 1, should be stored in localStorage to pass into getProfile request
@@ -71,6 +74,25 @@ export default function Profile() {
     }
   };
 
+  const handleUpdateBio = () => {
+    console.log("Update Bio clicked");
+    setUpdateBio(true);
+  };
+
+  const handleSaveBio = () => {
+    console.log("Save Bio clicked");
+    setUpdateBio(false);
+
+    axios
+      .post(updateBioRoute, {
+        userid: localStorage.getItem("uid"),
+        bio: bio,
+      })
+      .then((res) => {
+        console.log("Bio update response: ", res.data);
+      });
+  };
+
   // create an html layout that contains a profile header at the top, with image and username
   // below that, have a div section that contains profile information like a bio, age, height, weight, etc.
   // below that have a div section with a header above that reads "Dashboard"
@@ -89,7 +111,28 @@ export default function Profile() {
           <div className="profile__info">
             <div className="profile__bio">
               <h1>Bio</h1>
-              <p>{bio}</p>
+              {updateBio ? (
+                <>
+                  <button className="button-1" onClick={() => handleSaveBio()}>
+                    Save Bio
+                  </button>
+                  <input
+                    type="text"
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                  />
+                </>
+              ) : (
+                <>
+                  <button
+                    className="button-1"
+                    onClick={() => handleUpdateBio()}
+                  >
+                    Update Bio
+                  </button>
+                  <p>{bio}</p>
+                </>
+              )}
             </div>
           </div>
           <div className="achievements__header">

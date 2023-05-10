@@ -30,6 +30,7 @@ export const deleteRoutineEntriesByIdRoute = `${host}/api/routines/deleteroutine
 // profile routes
 export const getProfileRoute = `${host}/api/profile/getprofile/`;
 export const updateProfilePicRoute = `${host}/api/profile/updateicon/`;
+export const updateBioRoute = `${host}/api/profile/updatebio/`; // :id field attached to endpoint
 
 // history routes
 export const getHistoryRoute = `${host}/api/history/gethistory/`;

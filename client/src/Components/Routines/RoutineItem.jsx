@@ -203,6 +203,13 @@ export default function RoutineItem({
                 </button>
               </div>
             </div>
+            <button
+              className="button-1"
+              // make the functionality onClick={() => setShowExercises(!showExercises)} and also setShowRoutineEntries(!showRoutineEntries)
+              onClick={() => setShowExercises(!showExercises)}
+            >
+              Add Exercises
+            </button>
             <div className="popup__routine-item-exercises">
               <button onClick={() => setToggle(!toggle)}>
                 Edit Routine Entries
@@ -279,13 +286,6 @@ export default function RoutineItem({
                   </div>
                 ))}
             </div>
-            <button
-              className="button-1"
-              // make the functionality onClick={() => setShowExercises(!showExercises)} and also setShowRoutineEntries(!showRoutineEntries)
-              onClick={() => setShowExercises(!showExercises)}
-            >
-              Add Exercises
-            </button>
           </div>
         </div>
       )}
