@@ -8,6 +8,7 @@ export const getMaxIdRoute = `${host}/api/userpass/getmaxid/`;
 export const checkExistingUserRoute = `${host}/api/userpass/checkexistinguser/`;
 export const validateUPRoute = `${host}/api/userpass/validateup/`;
 export const insertNewUserRoute = `${host}/api/userpass/insertnewuser/`;
+export const insertNewUserInfoRoute = `${host}/api/userpass/insertnewuserinfo/`;
 
 // exercises routes
 export const getAllExercisesRoute = `${host}/api/exercises/getallexercises/`;

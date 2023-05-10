@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+import { checkExistingUserRoute } from "../../utils/api";
 
 import "./styles.css";
 
@@ -8,6 +11,16 @@ export default function RegisterForm({ user, onChange, onSubmit }) {
 
   const switchFormHandler = () => {
     if (user.firstName && user.lastName && user.username && user.password) {
+      axios
+        .post(checkExistingUserRoute, { username: user.username })
+        .then((res) => {
+          if (res.data.length > 0) {
+            console.log("Existing User: ", res.data);
+            alert("Username already exists!");
+            // setAdd(false);
+            return;
+          }
+        });
       setShowBasicForm(false);
     } else {
       alert("Please fill out all fields!");
@@ -95,8 +108,8 @@ export default function RegisterForm({ user, onChange, onSubmit }) {
               />
               {/* select with male and female, initial value is blank*/}
               <select className="userinfo-input" onChange={onChange}>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
               </select>
               <div className="date-container">
                 <input

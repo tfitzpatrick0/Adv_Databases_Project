@@ -4,9 +4,9 @@ import axios from "axios";
 import RegisterForm from "./RegisterForm";
 
 import {
-  getMaxIdRoute,
-  checkExistingUserRoute,
+  getAnyMaxIdRoute,
   insertNewUserRoute,
+  insertNewUserInfoRoute,
 } from "../../utils/api";
 
 import "./styles.css";
@@ -22,51 +22,11 @@ export default function Register() {
     password: "",
     email: "",
     bio: "",
-    sex: "male",
+    sex: "M",
     day: "",
     month: "",
     year: "",
   });
-
-  // flag is the state to watch for add/remove updates
-  const [add, setAdd] = useState(false);
-
-  // useEffect(() => {
-  //   if (newUser && add) {
-  //     console.log("New User: ", newUser);
-  //     let newId;
-
-  //     axios.get(getMaxIdRoute).then((res) => {
-  //       console.log("Max ID: ", res.data);
-  //       newId = parseInt(res.data[0]) + 1;
-  //       console.log("New ID: ", newId);
-  //     });
-
-  //     axios
-  //       .post(checkExistingUserRoute, { username: newUser.username })
-  //       .then((res) => {
-  //         console.log("Existing User: ", res.data);
-  //         if (res.data.length > 0) {
-  //           alert("Username already exists!");
-  //           // setAdd(false);
-  //           return;
-  //         }
-  //       });
-
-  //     axios
-  //       .post(insertNewUserRoute, {
-  //         uid: newId,
-  //         uname: newUser.username,
-  //         pass: newUser.password,
-  //       })
-  //       .then((res) => {
-  //         console.log("New User successfully registered!");
-  //         localStorage.setItem("uid", newId);
-  //         // navigate("/");
-  //         setAdd(false);
-  //       });
-  //   }
-  // }, [newUser, add]);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -78,42 +38,71 @@ export default function Register() {
     setNewUser({ ...newUser, [name]: newValue });
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log("submitted: ", e.target);
 
-    if (newUser) {
+    if (
+      newUser.firstName &&
+      newUser.lastName &&
+      newUser.username &&
+      newUser.password &&
+      newUser.email &&
+      newUser.bio &&
+      newUser.sex &&
+      newUser.day &&
+      newUser.month &&
+      newUser.year
+    ) {
       console.log("New User: ", newUser);
-      let newId;
+      let newUserpassId;
 
-      axios.get(getMaxIdRoute).then((res) => {
-        console.log("Max ID: ", res.data);
-        newId = parseInt(res.data[0]) + 1;
-        console.log("New ID: ", newId);
-      });
+      // .post(getAnyMaxIdRoute, {
+      //   column: "routine_entry_id",
+      //   table: "routine_entry",
+      // })
 
-      axios
-        .post(checkExistingUserRoute, { username: newUser.username })
+      await axios
+        .post(getAnyMaxIdRoute, {
+          column: "userid",
+          table: "userpass",
+        })
         .then((res) => {
-          console.log("Existing User: ", res.data);
-          if (res.data.length > 0) {
-            alert("Username already exists!");
-            // setAdd(false);
-            return;
-          }
+          console.log("Max Userpass ID: ", res.data);
+          newUserpassId = parseInt(res.data[0]) + 1;
+          console.log("New Userpass ID: ", newUserpassId);
         });
+
+      // let {uuserid, uusername, ufirst, ulast, uage, uemail, ubio, usex, day, month, year} = req.body;
 
       axios
         .post(insertNewUserRoute, {
-          uid: newId,
+          uid: newUserpassId,
           uname: newUser.username,
           pass: newUser.password,
         })
         .then((res) => {
           console.log("New User successfully registered!");
-          localStorage.setItem("uid", newId);
-          // navigate("/");
-          setAdd(true);
+          localStorage.setItem("uid", newUserpassId);
+        });
+
+      axios
+        .post(insertNewUserInfoRoute, {
+          uuserid: newUserpassId,
+          uusername: newUser.username,
+          ufirst: newUser.firstName,
+          ulast: newUser.lastName,
+          uage: newUser.age,
+          uemail: newUser.email,
+          ubio: newUser.bio,
+          usex: newUser.sex,
+          day: newUser.day,
+          month: newUser.month,
+          year: newUser.year,
+        })
+        .then((res) => {
+          console.log("New User Info successfully inputted into database!");
+          navigate("/");
         });
     }
   };
