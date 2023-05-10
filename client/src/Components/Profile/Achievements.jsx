@@ -8,7 +8,7 @@ import A5 from "../../assets/a5.png";
 
 import "./styles.css";
 
-export default function Achievements({ achievements }) {
+export default function Achievements({ achievements, handleAchievementClick }) {
   const images = [A1, A2, A3, A4, A5];
   const achievementNames = [
     "7-Day Streak - Work out seven days in a row",
@@ -27,6 +27,7 @@ export default function Achievements({ achievements }) {
               className={achievement ? "" : "gray"}
               src={images[index]}
               alt="badge"
+              onClick={() => handleAchievementClick(index)}
             />
             <h2>{achievementNames[index]}</h2>
           </div>

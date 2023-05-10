@@ -64,7 +64,7 @@ export default function History() {
         <div className="user-history-title">
           <h1>MY HISTORY</h1>
         </div>
-        <div className="bg-2">
+        <div>
           {history.map((historyItem, index) => (
             <HistoryItem historyItem={historyItem} key={index} />
           ))}

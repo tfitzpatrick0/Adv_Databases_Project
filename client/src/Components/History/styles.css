@@ -23,6 +23,11 @@
   margin-bottom: 1rem;
 }
 
+.history-item__wrapper {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 /* Popup style */
 .popup__routine-item__wrapper {
   position: fixed;

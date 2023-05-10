@@ -3,7 +3,12 @@ import axios from "axios";
 import ProfileHeader from "./ProfileHeader";
 import Achievements from "./Achievements";
 
-import { getProfileRoute, updateProfilePicRoute } from "../../utils/api";
+import {
+  getProfileRoute,
+  updateProfilePicRoute,
+  updateAchievementRoute,
+} from "../../utils/api";
+import { getAge } from "../../utils/date";
 
 import "./styles.css";
 
@@ -16,13 +21,13 @@ export default function Profile() {
 
   useEffect(() => {
     // demo with UID = 1, should be stored in localStorage to pass into getProfile request
-    const uid = 1;
+    const uid = localStorage.getItem("uid");
 
     axios.get(getProfileRoute + uid).then((res) => {
       console.log("Profile Data: ", res.data[0]);
       setUsername(res.data[0][0]);
       setBio(res.data[0][1]);
-      setAge(res.data[0][2]);
+      setAge(getAge(res.data[0][2]));
       setProfilePic(res.data[0][3]);
       setAchievements(res.data[0].slice(4));
     });
@@ -43,6 +48,27 @@ export default function Profile() {
     axios.post(updateProfilePicRoute, reqData).then((res) => {
       console.log("Profile Pic update response: ", res.data);
     });
+  };
+
+  const handleAchievementClick = (achIndex) => {
+    console.log("Achievement clicked: ", achIndex);
+    const achievementFields = ["ach1", "ach2", "ach3", "ach4", "ach5"];
+
+    if (achievements[achIndex] === 0) {
+      // set achievements at achIndex to 1
+      let newAchievements = [...achievements];
+      newAchievements[achIndex] = 1;
+      setAchievements(newAchievements);
+
+      axios
+        .post(updateAchievementRoute, {
+          userid: localStorage.getItem("uid"),
+          updatefield: achievementFields[achIndex],
+        })
+        .then((res) => {
+          console.log("Achievement update response: ", res.data);
+        });
+    }
   };
 
   // create an html layout that contains a profile header at the top, with image and username
@@ -69,7 +95,10 @@ export default function Profile() {
           <div className="achievements__header">
             <h1>Achievements</h1>
           </div>
-          <Achievements achievements={achievements} />
+          <Achievements
+            achievements={achievements}
+            handleAchievementClick={handleAchievementClick}
+          />
           <div className="dashboard__header">
             <h1>Dashboard</h1>
           </div>

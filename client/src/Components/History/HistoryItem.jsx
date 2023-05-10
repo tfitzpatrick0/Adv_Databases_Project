@@ -6,7 +6,7 @@ export default function HistoryItem({ historyItem }) {
   const [showHistoryEntries, setShowHistoryEntries] = useState(false);
 
   return (
-    <div className="history-item__wrapper">
+    <div className="history-item__wrapper bg-2">
       <div>
         <h1>{historyItem.routineName}</h1>
         <h3>DATE: {historyItem.date}</h3>

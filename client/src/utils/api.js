@@ -34,3 +34,7 @@ export const updateProfilePicRoute = `${host}/api/profile/updateicon/`;
 // history routes
 export const getHistoryRoute = `${host}/api/history/gethistory/`;
 export const saveWorkoutToHistRoute = `${host}/api/history/saveworkouttohist/`;
+
+// achievements routes
+export const createAchievementsRoute = `${host}/api/achievements/createachievements/`; // :id field attached to endpoint
+export const updateAchievementRoute = `${host}/api/achievements/updateach/`;

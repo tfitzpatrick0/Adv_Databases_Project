@@ -7,6 +7,7 @@ import {
   getAnyMaxIdRoute,
   insertNewUserRoute,
   insertNewUserInfoRoute,
+  createAchievementsRoute,
 } from "../../utils/api";
 
 import "./styles.css";
@@ -104,6 +105,10 @@ export default function Register() {
           console.log("New User Info successfully inputted into database!");
           navigate("/");
         });
+
+      axios.post(createAchievementsRoute + newUserpassId).then((res) => {
+        console.log("New User Achievements successfully created!");
+      });
     }
   };
 
