@@ -11,6 +11,8 @@ import { historyRouter } from "./routes/history.router";
 import { userpassRouter } from "./routes/userpass.router";
 import { generalRouter } from "./routes/general.router";
 import { achievementsRouter } from "./routes/achievements.router";
+import { metricsRouter } from "./routes/metrics.router";
+import { nutritionRouter } from "./routes/nutrition.router";
 
 export const app = express();
 
@@ -35,6 +37,8 @@ app.use("/api/history", historyRouter);
 app.use("/api/userpass", userpassRouter);
 app.use("/api/general", generalRouter);
 app.use("/api/achievements", achievementsRouter);
+app.use("/api/metrics", metricsRouter);
+app.use("/api/nutrition", nutritionRouter);
 
 export const start = async () => {
   try {

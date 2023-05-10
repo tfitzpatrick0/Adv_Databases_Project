@@ -102,64 +102,32 @@ export const updateRoutineEntry = async (req, res) => {
     }
   };
 
-  // export const generateRec = async (req, res) => {
-  //   try {
-  //     let {extype, bodypart, equipment, difficulty} = req.body;
-  //   if (!extype){
-  //     extype = '%';
-  //   }
-  //   if (!bodypart){
-  //     bodypart = '%';
-  //   }
-  //   if (!equipment){
-  //     equipment = '%';
-  //   }
-  //   if (!difficulty){
-  //     difficulty = '%';
-  //   }
-
-
-  //     const conn = await connect();
-
-  //     var result = await conn.execute(`select *
-  //     from exercises,
-  //     (select trunc(dbms_random.value(1,2917)) rnum from dual) x
-  //     where id = x.rnum and extype like '${extype}' and bodypart like '${bodypart}' and equipment like '${equipment}' and exlevel like '${difficulty}'`);
-
-  //     return res.json(result.rows);
-  //   } catch (err) {
-  //     console.error("Error in generateRec: ", err);
-  //     return res.status(400).end();
-
-  //   }
-  // };
   export const generateRec = async (req, res) => {
     try {
       const conn = await connect();
 
-const firstQuery = `SELECT *
-                    FROM exercises,
-                    (SELECT TRUNC(DBMS_RANDOM.VALUE(1, 2917)) rnum FROM dual) x
-                    WHERE id = x.rnum`;
+      const firstQuery = `SELECT *
+                          FROM exercises,
+                          (SELECT TRUNC(DBMS_RANDOM.VALUE(1, 2917)) rnum FROM dual) x
+                          WHERE id = x.rnum`;
 
-const firstQueryResult = await conn.execute(firstQuery);
-const secondQueryResult = await conn.execute(firstQuery);
-const thirdQueryResult = await conn.execute(firstQuery);
-const fourthQueryResult = await conn.execute(firstQuery);
+      const firstQueryResult = await conn.execute(firstQuery);
+      const secondQueryResult = await conn.execute(firstQuery);
+      const thirdQueryResult = await conn.execute(firstQuery);
+      const fourthQueryResult = await conn.execute(firstQuery);
 
-const response = {
-  firstQueryResult: firstQueryResult.rows,
-  secondQueryResult: secondQueryResult.rows,
-  thirdQueryResult: thirdQueryResult.rows,
-  fourthQueryResult: fourthQueryResult.rows
-};
+      const response = {
+        firstQueryResult: firstQueryResult.rows,
+        secondQueryResult: secondQueryResult.rows,
+        thirdQueryResult: thirdQueryResult.rows,
+        fourthQueryResult: fourthQueryResult.rows
+      };
 
-return res.json(response);
+      return res.json(response);
 
     } catch (err) {
       console.error("Error in generateRec: ", err);
       return res.status(400).end();
-
     }
   };
 
@@ -187,7 +155,7 @@ return res.json(response);
       if (!routineid){
         routineid = 1;
       }
-      const result = await conn.execute(`select e.title, x.reps, x.tot_weight, x.sets_comp, x.intensity
+      const result = await conn.execute(`select x.routine_entry_id, e.id, e.title, x.sets_comp, x.reps, x.tot_weight, x.intensity
       from exercises e,
       (select routine_entry_id, exercise_id_fk, reps, tot_weight, sets_comp, intensity from routine_entry where routine_id_fk='${routineid}')x
       where x.exercise_id_fk=e.id`);
@@ -195,6 +163,38 @@ return res.json(response);
       return res.json(result.rows);
     } catch (err) {
       console.error("Error in getEntriesByRoutine: ", err);
+      return res.status(400).end();
+    }
+  };
+
+  export const deleteRoutine = async (req, res) => {
+    try {
+      const conn = await connect();
+      let {routineid, userid} = req.body;
+
+      const deleteQuery = `DELETE FROM routines WHERE user_id_fk='${userid}' and routine_id='${routineid}'`; // Replace with your table name and condition
+      const result = await conn.execute(deleteQuery);
+      await conn.commit();
+      return res.json({ message: 'Delete successful' }); // Optional response indicating successful deletion
+
+    } catch (err) {
+      console.error("Error in deleteRoutine: ", err);
+      return res.status(400).end();
+    }
+  };
+
+  export const deleteRoutineEntriesByEID = async (req, res) => {
+    try {
+      const conn = await connect();
+      let {entryid} = req.body;
+
+      const deleteQuery = `DELETE FROM routine_entry WHERE routine_entry_id='${entryid}'`; // Replace with your table name and condition
+      const result = await conn.execute(deleteQuery);
+      await conn.commit();
+      return res.json({ message: 'Delete successful' }); // Optional response indicating successful deletion
+
+    } catch (err) {
+      console.error("Error in deleteRoutineEntry: ", err);
       return res.status(400).end();
     }
   };

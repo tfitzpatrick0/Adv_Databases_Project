@@ -7,7 +7,7 @@ export const getProfile = async (req, res) => {
     if (!userid){
       userid = 1;
     }
-    const result = await conn.execute(`SELECT username, bio, age, profilepic, ach1, ach2, ach3, ach4, ach5 FROM users u,achievements a where u.user_id_pk=${userid} and u.user_id_pk=a.user_id_fk`);
+    const result = await conn.execute(`SELECT username, bio, DOB, profilepic, ach1, ach2, ach3, ach4, ach5 FROM users u,achievements a where u.user_id_pk=${userid} and u.user_id_pk=a.user_id_fk`);
     return res.json(result.rows);
   } catch (err) {
     console.error("Error in getProfile: ", err);

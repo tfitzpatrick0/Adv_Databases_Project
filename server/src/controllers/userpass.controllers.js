@@ -44,6 +44,7 @@ export const checkExistingUser = async (req, res) => {
   export const insertNewUser = async (req, res) => {
     let conn;
     let {uid, uname, pass} = req.body;
+    console.log(uid, uname, pass);
     const sql="INSERT INTO userpass VALUES (:userid, :username, :passwd)";
     
     const binds = [
@@ -72,11 +73,6 @@ export const checkExistingUser = async (req, res) => {
     }    
   };
 
-
-
-
-
-
  //create user and achievement table
 
 export const insertNewUserInfo = async (req, res) => {
@@ -88,7 +84,7 @@ export const insertNewUserInfo = async (req, res) => {
   date = new Date(); // joined date is current time
 
   let dob=new Date();
-  dob.setFullYear(year, month, day); //january is 0, dec is 11
+  dob.setFullYear(year, month-1, day); //january is 0, dec is 11
   
   console.log("gen date: ", date);
   console.log("gen date: ", dob);

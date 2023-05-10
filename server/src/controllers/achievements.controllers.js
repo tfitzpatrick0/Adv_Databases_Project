@@ -23,6 +23,8 @@ export const createAchievements = async (req, res) => {
   };
 
   export const checkA1 = async (req, res) => {
+    // ach1, 7-Day Streak, Worked out at least seven times within the past week
+    // passes if returns 7 or more
     try {
       let userid = req.params.uid;
       console.log("uid", userid);
@@ -49,6 +51,8 @@ export const createAchievements = async (req, res) => {
 
 
   export const checkA2 = async (req, res) => {
+    // ach2, Workout Explorer, Try 5 different workout routines
+    // passes if returns 5 or more
     try {
       let userid = req.params.uid;
       console.log("uid", userid);
@@ -69,6 +73,8 @@ export const createAchievements = async (req, res) => {
   };
 
   export const checkA3 = async (req, res) => {
+    // ach3, Consistency is Key, Logged in at least 16 workouts this past month
+    // if 16 or more, then passes
     try {
       let userid = req.params.uid;
       console.log("uid", userid);
@@ -89,6 +95,8 @@ export const createAchievements = async (req, res) => {
   };
 
   export const checkA4 = async (req, res) => {
+    // ach4, HydroPro, Drink eight cups of water for at least 7 days
+    // if returns 7 or more, passes; 
     try {
       let userid = req.params.uid;
       console.log("uid", userid);
@@ -108,6 +116,8 @@ export const createAchievements = async (req, res) => {
   };
 
   export const checkA5 = async (req, res) => {
+    // ach5, Old Reliable, Do the same workout routine 5 times
+    // if returns 5 or more, passes
     try {
       let userid = req.params.uid;
       console.log("uid", userid);
