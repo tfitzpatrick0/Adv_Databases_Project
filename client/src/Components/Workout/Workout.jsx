@@ -123,6 +123,8 @@ export default function Workout({ routine }) {
           });
       }
     }
+
+    navigate("/");
   };
 
   return (
