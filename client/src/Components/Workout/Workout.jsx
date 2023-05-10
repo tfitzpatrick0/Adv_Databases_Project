@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { getAnyMaxIdRoute, getEntriesByRoutineRoute } from "../../utils/api";
+import {
+  getAnyMaxIdRoute,
+  getEntriesByRoutineRoute,
+  saveWorkoutToHistRoute,
+} from "../../utils/api";
 
 import "./styles.css";
 
@@ -66,10 +70,59 @@ export default function Workout({ routine }) {
     setRoutineEntries(updatedRoutineEntries);
   };
 
-  const handleSaveWorkout = () => {
+  const handleSaveWorkout = async () => {
     console.log("SAVING WORKOUT");
     alert(`Workout Saved! Congrats on completing ${routine.name}!`);
-    navigate("/");
+    // navigate("/");
+
+    let newWorkoutId;
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "workout_id",
+        table: "history",
+      })
+      .then((res) => {
+        console.log("Max Workout ID: ", res.data);
+        newWorkoutId = parseInt(res.data[0]) + 1;
+        console.log("New Workout ID: ", newWorkoutId);
+      });
+
+    if (routineEntries) {
+      console.log("Adding Routine Entries To History: ", routineEntries);
+
+      for (const routineEntry of routineEntries) {
+        let newHistoryId;
+
+        await axios
+          .post(getAnyMaxIdRoute, {
+            column: "hist_id",
+            table: "history",
+          })
+          .then((res) => {
+            console.log("Max History ID: ", res.data);
+            newHistoryId = parseInt(res.data[0]) + 1;
+            console.log("New History ID: ", newHistoryId);
+          });
+
+        // let {histid, workoutid, userid, routinename, exercisename, rreps, totweight, setscomp, iintensity} = req.body;
+        await axios
+          .post(saveWorkoutToHistRoute, {
+            histid: newHistoryId,
+            workoutid: newWorkoutId,
+            userid: localStorage.getItem("uid"),
+            routinename: routine.name,
+            exercisename: routineEntry.exName,
+            rreps: routineEntry.reps,
+            totweight: routineEntry.weight,
+            setscomp: routineEntry.sets,
+            iintensity: routineEntry.intensity,
+          })
+          .then((res) => {
+            console.log("Added Workout Entry to History: ", res.data);
+          });
+      }
+    }
   };
 
   return (

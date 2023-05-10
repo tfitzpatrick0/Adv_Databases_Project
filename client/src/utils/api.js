@@ -30,3 +30,4 @@ export const updateProfilePicRoute = `${host}/api/profile/updateicon/`;
 
 // history routes
 export const getHistoryRoute = `${host}/api/history/gethistory/`;
+export const saveWorkoutToHistRoute = `${host}/api/history/saveworkouttohist/`;

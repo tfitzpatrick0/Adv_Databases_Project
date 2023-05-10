@@ -12,7 +12,7 @@ export default function History() {
 
   useEffect(() => {
     // demo with UID = 1, should be stored in localStorage to pass into getProfile request
-    const uid = 1;
+    const uid = localStorage.getItem("uid");
 
     axios.get(getHistoryRoute + uid).then((res) => {
       console.log("History Data: ", res.data);
