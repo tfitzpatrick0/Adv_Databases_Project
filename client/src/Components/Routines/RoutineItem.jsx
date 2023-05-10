@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Exercises from "../Exercises/Exercises";
 
 import {
@@ -8,7 +9,6 @@ import {
 } from "../../utils/api";
 
 import "./styles.css";
-import axios from "axios";
 
 export default function RoutineItem({
   routine,
