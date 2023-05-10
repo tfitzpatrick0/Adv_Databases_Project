@@ -12,6 +12,7 @@ import {
   getAnyMaxIdRoute,
   addRoutineRoute,
   addRoutineEntryRoute,
+  deleteRoutineRoute,
 } from "../../utils/api";
 
 import "./styles.css";
@@ -130,6 +131,26 @@ export default function Routines() {
     // navigate("/workout");
   };
 
+  const handleDeleteRoutine = (routine) => {
+    console.log("DELETING ROUTINE: ", routine.name);
+
+    const updatedRoutines = routines.filter(
+      (routineItem) => routineItem.id !== routine.id
+    );
+    console.log("Updated Routines: ", updatedRoutines);
+
+    setRoutines(updatedRoutines);
+
+    axios
+      .post(deleteRoutineRoute, {
+        routineid: routine.id,
+        userid: localStorage.getItem("uid"),
+      })
+      .then((res) => {
+        console.log("Deleted Routine: ", res.data);
+      });
+  };
+
   const handleOnSave = (routineId, routineEntries) => {
     console.log("Saving Routine Number: ", routineId);
 
@@ -198,6 +219,7 @@ export default function Routines() {
                     routine={routine}
                     handleStartWorkout={handleStartWorkout}
                     handleOnSave={handleOnSave}
+                    handleDeleteRoutine={handleDeleteRoutine}
                     key={index}
                   />
                 ))}

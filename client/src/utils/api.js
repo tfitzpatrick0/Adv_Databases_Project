@@ -24,6 +24,9 @@ export const getRoutinesByUserRoute = `${host}/api/routines/getroutinesbyuser/`;
 export const getEntriesByRoutineRoute = `${host}/api/routines/getentriesbyroutine/`; // :routine_id field attached to endpoint
 export const generateRecRoute = `${host}/api/routines/generaterec/`;
 
+export const deleteRoutineRoute = `${host}/api/routines/deleteroutine/`;
+export const deleteRoutineEntriesByIdRoute = `${host}/api/routines/deleteroutineentriesbyeid/`;
+
 // profile routes
 export const getProfileRoute = `${host}/api/profile/getprofile/`;
 export const updateProfilePicRoute = `${host}/api/profile/updateicon/`;

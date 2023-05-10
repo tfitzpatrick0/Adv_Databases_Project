@@ -6,6 +6,7 @@ import {
   getAnyMaxIdRoute,
   getEntriesByRoutineRoute,
   addRoutineEntryRoute,
+  deleteRoutineEntriesByIdRoute,
 } from "../../utils/api";
 
 import "./styles.css";
@@ -14,6 +15,7 @@ export default function RoutineItem({
   routine,
   handleStartWorkout,
   handleOnSave,
+  handleDeleteRoutine,
 }) {
   const [routineEntries, setRoutineEntries] = useState([]);
   const [showRoutineEntries, setShowRoutineEntries] = useState(false);
@@ -97,6 +99,43 @@ export default function RoutineItem({
       });
   };
 
+  const deleteRoutineEntry = (entry, index) => {
+    console.log("ENTRY TO DELETE: ", entry);
+    console.log("ENTRY INDEX: ", index);
+
+    const updatedRoutineEntries = routineEntries.filter(
+      (routineEntry) => routineEntry.entryId !== entry.entryId
+    );
+    console.log("Updated Routine Entries: ", updatedRoutineEntries);
+
+    setRoutineEntries(updatedRoutineEntries);
+
+    // delete routine entry from database
+    axios
+      .post(deleteRoutineEntriesByIdRoute, {
+        entryid: entry.entryId,
+      })
+      .then((res) => {
+        console.log("Deleted Routine Entry: ", res.data);
+      });
+  };
+
+  const clearRoutine = () => {
+    console.log("CLEAR ROUTINE");
+    handleDeleteRoutine(routine);
+
+    // delete routine entries from database
+    routineEntries.forEach((routineEntry) => {
+      axios
+        .post(deleteRoutineEntriesByIdRoute, {
+          entryid: routineEntry.entryId,
+        })
+        .then((res) => {
+          console.log("Deleted Routine Entry: ", res.data);
+        });
+    });
+  };
+
   const handleOnChange = (e, entryIndex) => {
     e.preventDefault();
     console.log(e.target);
@@ -128,6 +167,9 @@ export default function RoutineItem({
       <div>
         <h2>{routine.name}</h2>
         <h3>{routine.desc}</h3>
+        <button className="button-1" onClick={() => clearRoutine()}>
+          Delete Routine
+        </button>
         <button onClick={() => setShowRoutineEntries(!showRoutineEntries)}>
           Edit
         </button>
@@ -162,11 +204,18 @@ export default function RoutineItem({
               </div>
             </div>
             <div className="popup__routine-item-exercises">
-              <button onClick={() => setToggle(!toggle)}>Edit</button>
+              <button onClick={() => setToggle(!toggle)}>
+                Edit Routine Entries
+              </button>
               {routineEntries &&
                 routineEntries.map((entry, index) => (
                   <div key={index}>
-                    <h2>{entry.exName}</h2>
+                    <div>
+                      <h2>{entry.exName}</h2>
+                      <button onClick={() => deleteRoutineEntry(entry, index)}>
+                        DELETE EXERCISE
+                      </button>
+                    </div>
                     <div className="flex-row">
                       <h3>Sets: </h3>
                       {toggle ? (
