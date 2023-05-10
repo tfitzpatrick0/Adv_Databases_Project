@@ -4,6 +4,7 @@ import "./styles.css";
 
 export default function AddRoutine({ handleAddRoutine }) {
   const [newRoutineName, setNewRoutineName] = useState("");
+  const [newRoutineDesc, setNewRoutineDesc] = useState("");
   const [showAddRoutine, setShowAddRoutine] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ export default function AddRoutine({ handleAddRoutine }) {
                 <button
                   className="button-1"
                   onClick={() => {
-                    handleAddRoutine(newRoutineName);
+                    handleAddRoutine(newRoutineName, newRoutineDesc);
                     setShowAddRoutine(!showAddRoutine);
                   }}
                 >
@@ -42,6 +43,13 @@ export default function AddRoutine({ handleAddRoutine }) {
               <input
                 type="text"
                 onChange={(e) => setNewRoutineName(e.target.value)}
+              />
+            </div>
+            <div>
+              <h2>Routine Desc: </h2>
+              <input
+                type="text"
+                onChange={(e) => setNewRoutineDesc(e.target.value)}
               />
             </div>
           </div>

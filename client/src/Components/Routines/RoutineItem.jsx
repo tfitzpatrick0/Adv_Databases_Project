@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Exercises from "../Exercises/Exercises";
 
+import {
+  getAnyMaxIdRoute,
+  getEntriesByRoutineRoute,
+  addRoutineEntryRoute,
+} from "../../utils/api";
+
 import "./styles.css";
+import axios from "axios";
 
 export default function RoutineItem({
   routine,
   handleStartWorkout,
-  handleAddExercise,
-  handleOnChange,
   handleOnSave,
 }) {
-  const [showRoutineItem, setShowRoutineItem] = useState(false);
+  const [routineEntries, setRoutineEntries] = useState([]);
+  const [showRoutineEntries, setShowRoutineEntries] = useState(false);
   const [showExercises, setShowExercises] = useState(false);
   const [toggle, setToggle] = useState(true);
 
@@ -21,25 +26,120 @@ export default function RoutineItem({
   //   "exercise 3",
   // ]);
 
-  const selectExercise = (exerciseId, exerciseName) => {
+  useEffect(() => {
+    axios.get(getEntriesByRoutineRoute + routine.id).then((res) => {
+      console.log(
+        "Routine Entries from DB" + " for " + routine.name + ": ",
+        res.data
+      );
+      let currRoutineEntries = [];
+
+      res.data.forEach((currRoutineEntry) => {
+        currRoutineEntries.push({
+          entryId: currRoutineEntry[0],
+          exId: currRoutineEntry[1],
+          exName: currRoutineEntry[2],
+          sets: currRoutineEntry[3],
+          reps: currRoutineEntry[4],
+          weight: currRoutineEntry[5],
+          intensity: currRoutineEntry[6],
+        });
+      });
+
+      setRoutineEntries(currRoutineEntries);
+    });
+  }, []);
+
+  const selectExercise = async (exerciseId, exerciseName) => {
     console.log("SELECTED EXERCISE: ", exerciseName);
     setShowExercises(!showExercises);
-    handleAddExercise(routine, exerciseId, exerciseName);
+
+    let newRoutineEntryId;
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "routine_entry_id",
+        table: "routine_entry",
+      })
+      .then((res) => {
+        console.log("Max Routine Entry ID: ", res.data);
+        newRoutineEntryId = parseInt(res.data[0]) + 1;
+        console.log("New Routine Entry ID: ", newRoutineEntryId);
+      });
+
+    const newRoutineEntry = {
+      entryId: newRoutineEntryId,
+      exId: exerciseId,
+      exName: exerciseName,
+      sets: 3,
+      reps: 10,
+      weight: 100,
+      intensity: 5,
+    };
+
+    const updatedRoutineEntries = [...routineEntries, newRoutineEntry];
+    setRoutineEntries(updatedRoutineEntries);
+
+    // add routine entry to database
+    // let {routineeid, exid, routinefk, rreps, tweight, setsc, dur, intense, note} = req.body;
+    axios
+      .post(addRoutineEntryRoute, {
+        routineeid: newRoutineEntryId,
+        exid: exerciseId,
+        routinefk: routine.id,
+        rreps: newRoutineEntry.reps,
+        tweight: newRoutineEntry.weight,
+        setsc: newRoutineEntry.sets,
+        intense: newRoutineEntry.intensity,
+      })
+      .then((res) => {
+        console.log("Added Routine Entry: ", res.data);
+      });
+  };
+
+  const handleOnChange = (e, entryIndex) => {
+    e.preventDefault();
+    console.log(e.target);
+
+    const { name, value: newValue } = e.target;
+    console.log(name, newValue);
+
+    console.log("ENTRY INDEX: ", entryIndex);
+
+    const updatedRoutineEntry = {
+      ...routineEntries[entryIndex],
+      [name]: newValue,
+    };
+    console.log("Updated Routine Entry: ", updatedRoutineEntry);
+
+    const updatedRoutineEntries = routineEntries.map((routineEntry) => {
+      if (routineEntry.entryId === updatedRoutineEntry.entryId) {
+        return updatedRoutineEntry;
+      }
+      return routineEntry;
+    });
+    console.log("Updated Routine Entries: ", updatedRoutineEntries);
+
+    setRoutineEntries(updatedRoutineEntries);
   };
 
   return (
     <div className="routine-item__wrapper bg-2">
       <div>
         <h2>{routine.name}</h2>
-        <button onClick={() => setShowRoutineItem(!showRoutineItem)}>
+        <h3>{routine.desc}</h3>
+        <button onClick={() => setShowRoutineEntries(!showRoutineEntries)}>
           Edit
         </button>
       </div>
-      {showRoutineItem && (
+      {showRoutineEntries && (
         <div className="popup__routine-item__wrapper">
           <div className="popup__routine-item__body">
             <div className="popup__routine-item-header">
-              <h1>{routine.name}</h1>
+              <div className="flex-column">
+                <h1>{routine.name}</h1>
+                <h3>{routine.desc}</h3>
+              </div>
               <div>
                 <button
                   className="button-1"
@@ -49,13 +149,13 @@ export default function RoutineItem({
                 </button>
                 <button
                   className="button-1"
-                  onClick={() => handleOnSave(routine.id - 1)}
+                  onClick={() => handleOnSave(routine.id, routineEntries)}
                 >
                   Save
                 </button>
                 <button
                   className="button-2"
-                  onClick={() => setShowRoutineItem(!showRoutineItem)}
+                  onClick={() => setShowRoutineEntries(!showRoutineEntries)}
                 >
                   Close
                 </button>
@@ -63,24 +163,22 @@ export default function RoutineItem({
             </div>
             <div className="popup__routine-item-exercises">
               <button onClick={() => setToggle(!toggle)}>Edit</button>
-              {routine.exercises &&
-                routine.exercises.map((exercise, index) => (
+              {routineEntries &&
+                routineEntries.map((entry, index) => (
                   <div key={index}>
-                    <h2>{exercise.name}</h2>
+                    <h2>{entry.exName}</h2>
                     <div className="flex-row">
                       <h3>Sets: </h3>
                       {toggle ? (
                         <h3 onDoubleClick={() => setToggle(!toggle)}>
-                          {exercise.sets}
+                          {entry.sets}
                         </h3>
                       ) : (
                         <input
                           type="text"
                           name="sets"
-                          value={exercise.sets}
-                          onChange={(e) =>
-                            handleOnChange(e, routine.id - 1, index)
-                          }
+                          value={entry.sets}
+                          onChange={(e) => handleOnChange(e, index)}
                         />
                       )}
                     </div>
@@ -88,16 +186,14 @@ export default function RoutineItem({
                       <h3>Reps: </h3>
                       {toggle ? (
                         <h3 onDoubleClick={() => setToggle(!toggle)}>
-                          {exercise.reps}
+                          {entry.reps}
                         </h3>
                       ) : (
                         <input
                           type="text"
                           name="reps"
-                          value={exercise.reps}
-                          onChange={(e) =>
-                            handleOnChange(e, routine.id - 1, index)
-                          }
+                          value={entry.reps}
+                          onChange={(e) => handleOnChange(e, index)}
                         />
                       )}
                     </div>
@@ -105,16 +201,29 @@ export default function RoutineItem({
                       <h3>Weight: </h3>
                       {toggle ? (
                         <h3 onDoubleClick={() => setToggle(!toggle)}>
-                          {exercise.weight}
+                          {entry.weight}
                         </h3>
                       ) : (
                         <input
                           type="text"
                           name="weight"
-                          value={exercise.weight}
-                          onChange={(e) =>
-                            handleOnChange(e, routine.id - 1, index)
-                          }
+                          value={entry.weight}
+                          onChange={(e) => handleOnChange(e, index)}
+                        />
+                      )}
+                    </div>
+                    <div className="flex-row">
+                      <h3>Intensity: </h3>
+                      {toggle ? (
+                        <h3 onDoubleClick={() => setToggle(!toggle)}>
+                          {entry.intensity}
+                        </h3>
+                      ) : (
+                        <input
+                          type="text"
+                          name="intensity"
+                          value={entry.intensity}
+                          onChange={(e) => handleOnChange(e, index)}
                         />
                       )}
                     </div>
@@ -123,7 +232,7 @@ export default function RoutineItem({
             </div>
             <button
               className="button-1"
-              // make the functionality onClick={() => setShowExercises(!showExercises)} and also setShowRoutineItem(!showRoutineItem)
+              // make the functionality onClick={() => setShowExercises(!showExercises)} and also setShowRoutineEntries(!showRoutineEntries)
               onClick={() => setShowExercises(!showExercises)}
             >
               Add Exercises

@@ -19,6 +19,10 @@ export const updateRoutineEntryRoute = `${host}/api/routines/updateroutineentry/
 export const addRoutineRoute = `${host}/api/routines/addroutine/`;
 export const addRoutineEntryRoute = `${host}/api/routines/addroutineentry/`;
 
+export const getRoutinesByUserRoute = `${host}/api/routines/getroutinesbyuser/`; // :id field attached to endpoint
+export const getEntriesByRoutineRoute = `${host}/api/routines/getentriesbyroutine/`; // :routine_id field attached to endpoint
+export const generateRecRoute = `${host}/api/routines/generaterec/`;
+
 // profile routes
 export const getProfileRoute = `${host}/api/profile/getprofile/`;
 export const updateProfilePicRoute = `${host}/api/profile/updateicon/`;

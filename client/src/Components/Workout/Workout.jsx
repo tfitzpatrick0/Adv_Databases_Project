@@ -1,43 +1,69 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import { getAnyMaxIdRoute, getEntriesByRoutineRoute } from "../../utils/api";
 
 import "./styles.css";
 
 export default function Workout({ routine }) {
   const navigate = useNavigate();
 
-  const [exercises, setExercises] = useState([]);
+  const [routineEntries, setRoutineEntries] = useState([]);
 
   const [toggle, setToggle] = useState(true);
 
   useEffect(() => {
-    // set exercises as a list from the routine prop
+    // set routineEntries from database
     if (routine) {
-      for (let i = 0; i < routine.exercises.length; i++) {
-        setExercises((exercises) => [...exercises, routine.exercises[i]]);
-      }
+      axios.get(getEntriesByRoutineRoute + routine.id).then((res) => {
+        console.log(
+          "Routine Entries from DB" + " for " + routine.name + ": ",
+          res.data
+        );
+        let currRoutineEntries = [];
+
+        res.data.forEach((currRoutineEntry) => {
+          currRoutineEntries.push({
+            entryId: currRoutineEntry[0],
+            exId: currRoutineEntry[1],
+            exName: currRoutineEntry[2],
+            sets: currRoutineEntry[3],
+            reps: currRoutineEntry[4],
+            weight: currRoutineEntry[5],
+            intensity: currRoutineEntry[6],
+          });
+        });
+
+        setRoutineEntries(currRoutineEntries);
+      });
     }
   }, []);
 
-  const handleOnChange = (e, index) => {
+  const handleOnChange = (e, entryIndex) => {
     e.preventDefault();
     console.log(e.target);
 
     const { name, value: newValue } = e.target;
     console.log(name, newValue);
 
-    console.log("LENGTH OF EXERCISES: ", exercises.length);
-    console.log(exercises[index]);
+    console.log("ENTRY INDEX: ", entryIndex);
 
-    const updatedExercise = { ...exercises[index], [name]: newValue };
-    const updatedExercises = exercises.map((exercise) => {
-      if (exercise.entryId === updatedExercise.entryId) {
-        return updatedExercise;
+    const updatedRoutineEntry = {
+      ...routineEntries[entryIndex],
+      [name]: newValue,
+    };
+    console.log("Updated Routine Entry: ", updatedRoutineEntry);
+
+    const updatedRoutineEntries = routineEntries.map((routineEntry) => {
+      if (routineEntry.entryId === updatedRoutineEntry.entryId) {
+        return updatedRoutineEntry;
       }
-      return exercise;
+      return routineEntry;
     });
+    console.log("Updated Routine Entries: ", updatedRoutineEntries);
 
-    setExercises(updatedExercises);
+    setRoutineEntries(updatedRoutineEntries);
   };
 
   const handleSaveWorkout = () => {
@@ -49,7 +75,7 @@ export default function Workout({ routine }) {
   return (
     // create an html layout that contains the routine title and a time at the top left,
     // and a start workout button and end workout button at the top right
-    // and a list of exercises below that
+    // and a list of routineEntries below that
     <div className="workout__page-layout bg-1">
       {routine ? (
         <>
@@ -72,21 +98,21 @@ export default function Workout({ routine }) {
           </div>
           <div className="workout-exercises__wrapper">
             <div className="panels__wrapper-2">
-              {/* map elements from exercises into child div elements */}
-              {exercises.map((exercise, index) => (
+              {/* map elements from routineEntries into child div elements */}
+              {routineEntries.map((routineEntry, index) => (
                 <div className="panel-2 bg-2" key={index}>
-                  <h2>{exercise.name}</h2>
+                  <h2>{routineEntry.exName}</h2>
                   <div className="flex-row">
                     <h3>Sets: </h3>
                     {toggle ? (
                       <h3 onDoubleClick={() => setToggle(!toggle)}>
-                        {exercise.sets}
+                        {routineEntry.sets}
                       </h3>
                     ) : (
                       <input
                         type="text"
                         name="sets"
-                        value={exercise.sets}
+                        value={routineEntry.sets}
                         onChange={(e) => handleOnChange(e, index)}
                       />
                     )}
@@ -95,13 +121,13 @@ export default function Workout({ routine }) {
                     <h3>Reps: </h3>
                     {toggle ? (
                       <h3 onDoubleClick={() => setToggle(!toggle)}>
-                        {exercise.reps}
+                        {routineEntry.reps}
                       </h3>
                     ) : (
                       <input
                         type="text"
                         name="reps"
-                        value={exercise.reps}
+                        value={routineEntry.reps}
                         onChange={(e) => handleOnChange(e, index)}
                       />
                     )}
@@ -110,13 +136,28 @@ export default function Workout({ routine }) {
                     <h3>Weight: </h3>
                     {toggle ? (
                       <h3 onDoubleClick={() => setToggle(!toggle)}>
-                        {exercise.weight}
+                        {routineEntry.weight}
                       </h3>
                     ) : (
                       <input
                         type="text"
                         name="weight"
-                        value={exercise.weight}
+                        value={routineEntry.weight}
+                        onChange={(e) => handleOnChange(e, index)}
+                      />
+                    )}
+                  </div>
+                  <div className="flex-row">
+                    <h3>Intensity: </h3>
+                    {toggle ? (
+                      <h3 onDoubleClick={() => setToggle(!toggle)}>
+                        {routineEntry.intensity}
+                      </h3>
+                    ) : (
+                      <input
+                        type="text"
+                        name="intensity"
+                        value={routineEntry.intensity}
                         onChange={(e) => handleOnChange(e, index)}
                       />
                     )}
