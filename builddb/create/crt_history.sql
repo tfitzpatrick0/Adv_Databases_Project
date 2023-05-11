@@ -1,9 +1,15 @@
 drop table history cascade constraints;
 create table history(
     hist_id number(5),
-    routine_id_fk number(3),
+    workout_id number(5),
     user_id_fk number(5), --add fk
+    routine_name varchar2(50),
     date_comp date,
+    exercise_name varchar2(100),
+    reps number(3),
+    tot_weight number(5,1),
+    sets_comp number(2),
+    intensity number(2),
     constraint hist_id_pk primary key (hist_id)   
 )
 /

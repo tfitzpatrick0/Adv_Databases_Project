@@ -9,7 +9,7 @@ create table users
     DOB date,
     user_ui_theme number(1),
     user_is_guest number(1),
-    email varchar2(20),
+    email varchar2(30),
     profilePic number(1),
     bio varchar2(200),
     sex varchar2(3),

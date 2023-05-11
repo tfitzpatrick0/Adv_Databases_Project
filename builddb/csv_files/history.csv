@@ -1,8 +1,24 @@
-1,1,1,01/02/2001
-2,1,1,01/05/2001
-3,2,1,01/06/2001
-4,1,1,01/07/2001
-5,3,1,01/08/2001
-6,1,1,01/09/2001
-7,2,1,01/10/2001
-8,1,1,01/11/2001
+1,1,1, routine1, 01/02/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+2,1,1, routine1, 01/05/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+3,2,1, routine2, 01/06/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+4,1,1, routine1, 01/07/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+5,3,1, routine3, 01/08/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+6,1,1, routine3, 01/09/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+7,2,1, routine2, 01/10/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+8,1,1, routine1, 01/11/2001, "Leg-Over Floor Press", 8, 45, 4, 8 
+9, 4, 1, "Recommended Routine", 05/10/2023, "Leg-Over Floor Press", 15, 100, 3, 7
+10, 4, 1, "Recommended Routine", 05/10/2023, "Rocket Jump", 12, 135, 7, 3
+11, 4, 1, "Recommended Routine", 05/10/2023, "King Maker Barbell Bench Press", 20, 115, 2, 8
+12, 4, 1, "Recommended Routine", 05/10/2023, "Spider lunge with T-rotation", 8, 25, 5, 8
+13, 5, 1, "Recommended Routine", 05/10/2023, "Dumbbell Crunch - Gethin Variation", 12, 135, 4, 7
+14, 5, 1, "Recommended Routine", 05/10/2023, "Knees tucked crunch", 12, 135, 4, 7
+15, 5, 1, "Recommended Routine", 05/10/2023, "Side kick-through to kettlebell high pull", 12, 135, 4, 7
+16, 5, 1, "Recommended Routine", 05/10/2023, "MetaBurn Alternating Superman", 12, 135, 4, 7
+17, 6, 1, "Recommended Routine", 05/10/2023, "Upper Back Stretch", 12, 135, 4, 7
+18, 6, 1, "Recommended Routine", 05/10/2023, "Cable V-bar push-down", 12, 135, 4, 7
+19, 6, 1, "Recommended Routine", 05/10/2023, "Double-arm triceps kick-back", 12, 135, 4, 7
+20, 6, 1, "Recommended Routine", 05/10/2023, "Knee To Chest", 12, 135, 4, 7
+21, 7, 1, "Recommended Routine", 05/10/2023, "FYR2 Monster Band Face-Pull Hold", 12, 135, 40, 8
+22, 7, 1, "Recommended Routine", 05/10/2023, "Holman Weighted Killer Abs with Overhead Press", 15, 115, 4, 7
+23, 7, 1, "Recommended Routine", 05/10/2023, "HM Shoulder Stretch", 12, 135, 2, 2
+24, 7, 1, "Recommended Routine", 05/10/2023, "Jerk Dip Squat", 12, 1355, 1, 10

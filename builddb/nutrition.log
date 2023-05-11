@@ -1,5 +1,5 @@
 
-SQL*Loader: Release 11.2.0.2.0 - Production on Thu May 4 10:41:04 2023
+SQL*Loader: Release 11.2.0.2.0 - Production on Thu May 11 02:09:01 2023
 
 Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
 
@@ -30,7 +30,7 @@ CALORIES                             NEXT     *   ,  O(") CHARACTER
 
 
 Table NUTRITION:
-  5 Rows successfully loaded.
+  55 Rows successfully loaded.
   0 Rows not loaded due to data errors.
   0 Rows not loaded because all WHEN clauses were failed.
   0 Rows not loaded because all fields were null.
@@ -40,12 +40,12 @@ Space allocated for bind array:                  82560 bytes(64 rows)
 Read   buffer bytes: 1048576
 
 Total logical records skipped:          0
-Total logical records read:             5
+Total logical records read:            55
 Total logical records rejected:         0
 Total logical records discarded:        0
 
-Run began on Thu May 04 10:41:04 2023
-Run ended on Thu May 04 10:41:04 2023
+Run began on Thu May 11 02:09:01 2023
+Run ended on Thu May 11 02:09:01 2023
 
-Elapsed time was:     00:00:00.04
-CPU time was:         00:00:00.01
+Elapsed time was:     00:00:00.03
+CPU time was:         00:00:00.00

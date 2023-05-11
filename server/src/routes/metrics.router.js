@@ -3,6 +3,7 @@ import { getMetricsForGraph, getMetricsForHistoryWithNutrition } from "../contro
 import { getPieExpMetrics } from "../controllers/metrics.controllers";
 import { getMetricsForHistory } from "../controllers/metrics.controllers";
 import { addMetricsToHist } from "../controllers/metrics.controllers";
+import { getRadarMetrics } from "../controllers/metrics.controllers";
 
 
 export const metricsRouter = Router();
@@ -13,4 +14,5 @@ metricsRouter.get("/getpieexpmetrics/:uid", getPieExpMetrics);
 metricsRouter.get("/getmetricsforhistory/:uid", getMetricsForHistory);
 metricsRouter.get("/getmetricsforhistorywithnutrition/:uid", getMetricsForHistoryWithNutrition);
 metricsRouter.post("/addmetricstohist", addMetricsToHist);
+metricsRouter.post("/getradarmetrics", getRadarMetrics);
 
