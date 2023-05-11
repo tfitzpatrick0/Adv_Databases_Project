@@ -142,21 +142,6 @@ export default function Profile() {
             achievements={achievements}
             handleAchievementClick={handleAchievementClick}
           />
-          <div className="dashboard__header">
-            <h1>Dashboard</h1>
-          </div>
-          <div className="dashboard__info">
-            <div className="dashboard__bio">
-              <h2>Your progress report for this week:</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                facilisi. Nullam euismod, nisl eget ultricies ultrices, nunc
-                nisl aliquam nunc, vitae aliquam nisl nunc eget nunc. Nulla
-                facilisi. Nullam euismod, nisl eget ultricies ultrices, nunc
-                nisl aliquam nunc, vitae aliquam nisl nunc eget nunc.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

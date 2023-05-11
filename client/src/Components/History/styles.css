@@ -1,7 +1,7 @@
 @import "../../assets/global.css";
 
 .history__page-layout {
-  height: var(--page-height);
+  height: calc(var(--page-height) - 7rem);
   padding: 1.5rem;
   display: grid;
   grid-template-columns: 1fr 1fr;

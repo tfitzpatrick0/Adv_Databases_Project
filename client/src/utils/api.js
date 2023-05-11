@@ -39,3 +39,8 @@ export const saveWorkoutToHistRoute = `${host}/api/history/saveworkouttohist/`;
 // achievements routes
 export const createAchievementsRoute = `${host}/api/achievements/createachievements/`; // :id field attached to endpoint
 export const updateAchievementRoute = `${host}/api/achievements/updateach/`;
+
+// metrics routes
+export const getRadarMetricsRoute = `${host}/api/metrics/getradarmetrics/`;
+export const getMetricsForGraph = `${host}/api/metrics/getmetricsforgraph/`; // gets nutrition metrics to populate a line graph, weird endpoint name
+export const getMetricsForHistoryWithNutritionRoute = `${host}/api/metrics/getmetricsforhistorywithnutrition/`; // :uid field attached to endpoint
