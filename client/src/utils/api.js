@@ -44,3 +44,7 @@ export const updateAchievementRoute = `${host}/api/achievements/updateach/`;
 export const getRadarMetricsRoute = `${host}/api/metrics/getradarmetrics/`;
 export const getMetricsForGraph = `${host}/api/metrics/getmetricsforgraph/`; // gets nutrition metrics to populate a line graph, weird endpoint name
 export const getMetricsForHistoryWithNutritionRoute = `${host}/api/metrics/getmetricsforhistorywithnutrition/`; // :uid field attached to endpoint
+export const addMetricsToHistRoute = `${host}/api/metrics/addmetricstohist/`;
+
+// nutrition routes
+export const addNutritionToHistRoute = `${host}/api/nutrition/addnutritiontohist/`;

@@ -7,10 +7,13 @@ import NutritionItem from "./NutritionItem";
 import AddNutrition from "./AddNutrition";
 
 import {
+  getAnyMaxIdRoute,
   getHistoryRoute,
   getRadarMetricsRoute,
   getMetricsForHistoryWithNutritionRoute,
   getMetricsForGraph,
+  addMetricsToHistRoute,
+  addNutritionToHistRoute,
 } from "../../utils/api";
 
 import "./styles.css";
@@ -161,8 +164,61 @@ export default function History() {
       });
   }, [nutritionMetrics]);
 
-  const handleAddNutrition = (newNutrition, newMetrics) => {
-    console.log("Add Nutrition");
+  const handleAddNutrition = async (newNutrition, newMetrics) => {
+    console.log("Adding Metrics: ", newMetrics);
+    console.log("Adding Nutrition: ", newNutrition);
+
+    let newMetricId;
+    let newNutritionId;
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "metric_id",
+        table: "user_metrics",
+      })
+      .then((res) => {
+        console.log("Max Metric ID: ", res.data);
+        newMetricId = parseInt(res.data[0]) + 1;
+        console.log("New Metric ID: ", newMetricId);
+      });
+
+    await axios
+      .post(getAnyMaxIdRoute, {
+        column: "nutrition_id_pk",
+        table: "nutrition",
+      })
+      .then((res) => {
+        console.log("Max Nutrition ID: ", res.data);
+        newNutritionId = parseInt(res.data[0]) + 1;
+        console.log("New Nutrition ID: ", newNutritionId);
+      });
+
+    axios
+      .post(addNutritionToHistRoute, {
+        nutritionid: newNutritionId,
+        userid: localStorage.getItem("uid"),
+        water: newNutrition.water,
+        proteins: newNutrition.proteins,
+        cals: newNutrition.cals,
+      })
+      .then((res) => {
+        console.log("Added Nutrition to History: ", res.data);
+      });
+
+    axios
+      .post(addMetricsToHistRoute, {
+        metricid: newMetricId,
+        userid: localStorage.getItem("uid"),
+        bodyweight: newMetrics.bodyweight,
+        bicep: newMetrics.bicep,
+        hip: newMetrics.hip,
+        waist: newMetrics.waist,
+        chest: newMetrics.chest,
+        nutrition: newNutritionId,
+      })
+      .then((res) => {
+        console.log("Added Metrics to History: ", res.data);
+      });
   };
 
   return (
