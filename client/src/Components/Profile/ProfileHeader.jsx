@@ -12,6 +12,7 @@ export default function ProfileHeader({
   age,
   profilePic,
   onProfilePicChange,
+  handleLogOut,
 }) {
   const displayProfilePic = (profilePic) => {
     console.log("NEW PROFILE PIC: ", profilePic);
@@ -30,6 +31,9 @@ export default function ProfileHeader({
     <div className="profile__header">
       <div className="profile__header-info">
         {displayProfilePic(profilePic)}
+        <button className="button-1" onClick={handleLogOut}>
+          LOG OUT
+        </button>
         {/* dropdown form with four options */}
         <form>
           <select onChange={onProfilePicChange}>

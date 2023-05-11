@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ProfileHeader from "./ProfileHeader";
 import Achievements from "./Achievements";
@@ -14,6 +15,8 @@ import { getAge } from "../../utils/date";
 import "./styles.css";
 
 export default function Profile() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [age, setAge] = useState();
@@ -93,6 +96,11 @@ export default function Profile() {
       });
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem("uid");
+    navigate("/login");
+  };
+
   // create an html layout that contains a profile header at the top, with image and username
   // below that, have a div section that contains profile information like a bio, age, height, weight, etc.
   // below that have a div section with a header above that reads "Dashboard"
@@ -107,6 +115,7 @@ export default function Profile() {
             age={age}
             profilePic={profilePic}
             onProfilePicChange={onProfilePicChange}
+            handleLogOut={handleLogOut}
           />
           <div className="profile__info">
             <div className="profile__bio">
